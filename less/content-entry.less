@@ -1,0 +1,33 @@
+// 글, 페이지
+.singular {
+
+	// 글: 제목
+	.entry-header {
+		&:extend(.page-header all);
+	}
+
+	// 글: 썸네일
+	.post-thumbnail {
+		margin-bottom: (1.5 * 10px);
+		@media (min-width: @phone) {
+			margin-bottom: 10px;
+		}
+		.wp-post-image {
+			width: 100%;
+		}
+	}
+
+	// 글: 내용
+	.page-content,
+	.entry-content {
+		h1, h2, h3 { margin: 25px 0 10px }
+		p, ul, ol { margin-bottom: 10px }
+		a:hover {
+			.underline;
+			&.btn { text-decoration: none }
+		}
+		.font-size(16);
+		line-height: 1.6;
+	}
+
+}

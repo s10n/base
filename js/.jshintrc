@@ -1,0 +1,18 @@
+{
+  "asi"      : true,
+  "bitwise"  : true,
+  "browser"  : true,
+  "eqeqeq"   : true,
+  "eqnull"   : true,
+  "es3"      : true,
+  "expr"     : true,
+  "jquery"   : true,
+  "latedef"  : true,
+  "laxbreak" : true,
+  "newcap"   : true,
+  "noarg"    : true,
+  "nonbsp"   : true,
+  "strict"   : true,
+  "undef"    : true,
+  "unused"   : true
+}
