@@ -1,0 +1,64 @@
+.sitemap {
+	@sitemap-link: @gray-30;
+	line-height: 1.8;
+
+	// 링크 색상
+	a { .link(@sitemap-link;@black) }
+	a.no-title,
+	a.entry-format { .link(@text-light) }
+	.tag-links a   { .link(@white;@white) }
+
+	// 믹스인: 목록
+	.sitemap-list() {
+		color: @text-light;
+		&, .children { .list-unstyled }
+		li:before {
+			.fa; .fa-fw;
+			margin-right: 10px;
+		}
+	}
+
+	// 모든 페이지
+	.sitemap-pages {
+		.sitemap-list();
+		.page_item:before              { content: @fa-var-square-o }
+		.page_item_has_children:before { content: @fa-var-plus-square-o }
+		.children { margin-left: 25px }
+	}
+
+	// 모든 날짜
+	.sitemap-archives {
+		.sitemap-list();
+		> li:before { content: @fa-var-calendar }
+	}
+
+	// 모든 저자
+	.sitemap-authors {
+		.sitemap-list();
+		> li:before { content: @fa-var-user }
+	}
+
+	// 모든 태그
+	.sitemap-tags {
+		margin-bottom: 50px;
+	}
+
+	// 모든 카테고리
+	.type-post {
+		.entry-meta { .14px; display: inline-block }
+		.post-format { margin-right: 10px }
+	}
+
+	// 아이콘: 글 형식
+	.entry-format:before     { .fa; .fa-fw; content: @fa-var-square; }
+	.format-standard .entry-format:before { content: @fa-var-thumb-tack }
+	.format-status   .entry-format:before { content: @fa-var-commenting-o }
+	.format-aside    .entry-format:before { content: @fa-var-files-o }
+	.format-image    .entry-format:before { content: @fa-var-picture-o }
+	.format-video    .entry-format:before { content: @fa-var-youtube-play }
+	.format-audio    .entry-format:before { content: @fa-var-music }
+	.format-quote    .entry-format:before { content: @fa-var-quote-left }
+	.format-link     .entry-format:before { content: @fa-var-link }
+	.format-gallery  .entry-format:before { content: @fa-var-th }
+	.format-chat     .entry-format:before { content: @fa-var-comments }
+}
