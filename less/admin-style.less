@@ -1,0 +1,65 @@
+@charset "utf-8";
+@style-uri: "../style";
+
+// 프레임워크
+@import "__admin-bootstrap";
+@import "__admin-customize";
+
+// 기본
+//@import "@{style-uri}/akaiv/akaiv";
+//@import "__variables";
+//@import "__fonts";
+//@import "__theme";
+//@import "__mixins";
+
+// 관리자 기본 스타일시트 덮어쓰기
+// <body>
+@body-bg: initial;
+li {
+	margin-bottom: 0;
+}
+hr {
+	border-top:    1px solid hsl(0, 0%, 87%);
+	border-bottom: 1px solid hsl(0, 0%, 98%);
+}
+
+// Forms
+.wp-admin select.form-control {
+	height: @input-height-base;
+	padding: @padding-base-vertical @padding-base-horizontal;
+	line-height: @line-height-base;
+	&.input-sm { .input-size(@input-height-small; @padding-small-vertical; @padding-small-horizontal; @font-size-small; @line-height-small; @border-radius-small); }
+	&.input-lg { .input-size(@input-height-large; @padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @border-radius-large); }
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+	margin-top: 2px;
+}
+
+input[type=email],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=url],
+select,
+textarea {
+	&.form-control { border-color: @input-border }
+}
+
+// Outline: 0
+a,
+.btn,
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus,
+.dropdown-toggle:active {
+	outline: 0 !important;
+}
+
+// Tab
+.nav-tabs > li.active > a {
+	&, &:hover, &:focus { background-color: hsl(0, 0%, 95%); }
+}
