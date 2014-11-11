@@ -7,7 +7,9 @@
       <?php akaiv_the_title(); ?>
     </h1>
     <div class="entry-meta">
-      <?php akaiv_post_meta(); ?>
+      <?php akaiv_post_meta( 'category' ); ?>
+      <?php akaiv_post_meta( 'date' ); ?>
+      <?php akaiv_post_meta( 'author' ); ?>
       <?php akaiv_edit_post_link(); ?>
     </div>
   </header>

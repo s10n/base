@@ -1,6 +1,6 @@
 <?php akaiv_before_page(); ?>
 
-<?php akaiv_page_header('찾을 수 없습니다.'); ?>
+<?php akaiv_page_header( '찾을 수 없습니다.' ); ?>
 
 <div class="page-content">
   <p>

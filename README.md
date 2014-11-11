@@ -1,7 +1,7 @@
 # 베이스 테마
 ## 개요
 * 설명: [워드프레스](https://wordpress.org) 테마를 만들때 기초가 되는 파일들입니다.
-* 작성자: [심철환](https://github.com/s10n)
+* 작성자: [아카이브](http://akaiv.com)의 [심철환](http://simcheolhwan.com)
 
 ## 테마 설치
 * 워드프레스 테마 디렉토리에 이 리파지토리를 클론합니다.
