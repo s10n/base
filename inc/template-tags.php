@@ -74,7 +74,7 @@ function akaiv_the_title() {
 
 /* 글: 썸네일 */
 function akaiv_post_thumbnail() {
-  if ( post_password_required() ) : /* 비밀번호가 필요한 경우 */ ?>
+  if ( post_password_required() && ! is_singular() ) : /* 비밀번호가 필요한 경우 */ ?>
     <a class="post-thumbnail" href="<?php the_permalink(); ?>"><img width="150" height="150" src="<?php echo get_template_directory_uri(); ?>/images/thumbnail-lock.png" class="attachment-thumbnail wp-post-image" alt="<?php echo get_the_title(); ?>"></a><?php
     return;
   endif;
@@ -101,7 +101,7 @@ function akaiv_post_thumbnail() {
 /* 글: 메타 */
 function akaiv_post_meta($str = null) {
   if ( ! $str ) :
-    return false;
+    return;
 
   elseif ( $str == 'category' ) : ?>
     <span class="cat-links"><i class="fa fa-fw fa-folder-open"></i> <?php echo get_the_category_list( ', ' ); ?></span><?php
@@ -124,10 +124,8 @@ function akaiv_post_meta($str = null) {
 function akaiv_edit_post_link() {
   if ( is_single() ) :
     edit_post_link( '편집', '<span class="edit-link"><i class="fa fa-fw fa-pencil"></i> ', '</span>' );
-  else : ?>
-    <div class="text-right"><?php
-      edit_post_link( '편집', '<span class="edit-link">', '</span>' ); ?>
-    </div><?php
+  else :
+    edit_post_link( '편집', '<div class="text-right"><span class="edit-link">', '</span></div>' );
   endif;
 }
 
