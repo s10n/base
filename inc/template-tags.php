@@ -98,6 +98,15 @@ function akaiv_post_thumbnail() {
   endif; /* End is_singular() */
 }
 
+/* 레티나 대응 썸네일 */
+function the_post_thumbnail_srcset($size1x, $size2x) {
+  $post_thumbnail_id = get_post_thumbnail_id( get_the_ID() );
+  $image = wp_get_attachment_image_src( $post_thumbnail_id, $size2x );
+  list($src, $width, $height) = $image;
+  $attr = array( 'srcset' => $src.' 2x' );
+  the_post_thumbnail($size1x, $attr);
+}
+
 /* 글: 메타 */
 function akaiv_post_meta($str = null) {
   if ( ! $str ) :
