@@ -26,12 +26,17 @@ add_action( 'wp_enqueue_scripts', 'akaiv_scripts' );
 function akaiv_head() { ?>
   <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/images/favicon/favicon.png">
 
-  <?php if ( is_single() ) : ?>
+  <?php if ( is_singular() ) : ?>
   <meta property="og:title" content="<?php single_post_title(); ?>">
-  <meta property="og:description" content="<?php $excerpt = get_the_excerpt(); if ( $excerpt != '' ) echo $excerpt; ?>">
+  <meta property="og:description" content="<?php echo strip_tags(get_the_excerpt()); ?>">
   <meta property="og:url" content="<?php the_permalink(); ?>">
   <meta property="og:type" content="article">
-  <meta property="og:image" content="<?php echo get_template_directory_uri(); ?>/images/fb-image.jpg">
+  <?php
+    $fb_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
+    if ($fb_image) :
+      echo '<meta property="og:image" content="'.$fb_image[0].'">';
+    endif;
+  ?>
 
   <?php else : ?>
   <meta property="og:site_name" content="<?php bloginfo( 'name' ); ?>">
