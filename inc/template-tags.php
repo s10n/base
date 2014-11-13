@@ -163,6 +163,7 @@ function akaiv_paginate_links() {
       'current' => max( 1, get_query_var('paged') ),
       'total' => $wp_query->max_num_pages,
       'after_page_number' => '<span class="screen-reader-text">번째 페이지</span>',
+      'prev_next' => False,
       'type' => 'array'
     );
     $paginate_links = paginate_links( $args );
