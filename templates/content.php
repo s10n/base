@@ -34,7 +34,7 @@
         </h1>
       </header>
       <div class="entry-summary">
-        <a href="<?php the_permalink(); ?>"><?php the_excerpt(); ?></a>
+        <?php the_excerpt(); ?>
       </div>
     </div><!-- column: 제목과 요약 -->
   </div><!-- .row -->
