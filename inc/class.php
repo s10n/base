@@ -1,6 +1,9 @@
 <?php
-/* <body>: .singular.page-{slug} */
+/* <body>: .singular.page-{slug}.ie */
 function akaiv_body_class( $classes ) {
+  global $is_IE;
+  if ( $is_IE ) $classes[] = 'ie';
+
   if ( is_singular() && ! is_front_page() ) :
     $classes[] = 'singular';
     if (!in_array(basename(get_permalink()), $classes)) :
