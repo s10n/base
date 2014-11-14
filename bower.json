@@ -6,7 +6,7 @@
     "assets"
   ],
   "dependencies": {
-    "bootstrap": "3.3.0",
+    "bootstrap": "3.3.1",
     "fontawesome": "4.2.0",
     "modernizr": "2.8.3",
     "html5shiv": "3.7.2",
