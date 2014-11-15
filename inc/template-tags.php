@@ -48,6 +48,8 @@ function akaiv_page_title() {
     elseif ( is_tax( 'post_format', 'post-format-quote'   ) ) : echo '인용';
     elseif ( is_tax( 'post_format', 'post-format-link'    ) ) : echo '링크';
     elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) : echo '갤러리';
+    elseif ( is_tax( 'post_format', 'post-format-status'  ) ) : echo '상태';
+    elseif ( is_tax( 'post_format', 'post-format-chat'    ) ) : echo '챗';
     elseif ( is_day()      ) : echo get_the_date();
     elseif ( is_month()    ) : echo get_the_date( 'Y년 F' );
     elseif ( is_year()     ) : echo get_the_date( 'Y년' );
