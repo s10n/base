@@ -11,48 +11,56 @@ function akaiv_after_content() { ?>
   </div><!-- #content --><?php
 }
 
-/* 페이지 헤더: 글 및 보관함 */
-function akaiv_page_header($str = null) { ?>
+/* 페이지 헤더 */
+function akaiv_page_header($heading = null) { ?>
   <header class="page-header">
     <h1 class="page-title"><?php
-      if ( $str ) :
-        echo $str;
-
-      elseif ( is_404() ) :
-        echo 'Not Found';
-
-      elseif ( is_search() ) :
-        printf( '검색 결과: %s', get_search_query() );
-
-      elseif ( is_archive()  ) :
-            if ( is_tax( 'post_format', 'post-format-aside'   ) ) : echo '추가 정보';
-        elseif ( is_tax( 'post_format', 'post-format-image'   ) ) : echo '이미지';
-        elseif ( is_tax( 'post_format', 'post-format-video'   ) ) : echo '비디오';
-        elseif ( is_tax( 'post_format', 'post-format-audio'   ) ) : echo '오디오';
-        elseif ( is_tax( 'post_format', 'post-format-quote'   ) ) : echo '인용';
-        elseif ( is_tax( 'post_format', 'post-format-link'    ) ) : echo '링크';
-        elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) : echo '갤러리';
-        elseif ( is_day()      ) : echo get_the_date();
-        elseif ( is_month()    ) : echo get_the_date( 'Y년 F' );
-        elseif ( is_year()     ) : echo get_the_date( 'Y년' );
-        elseif ( is_author()   ) : the_post(); echo get_the_author().'의 모든 글'; rewind_posts();
-        elseif ( is_tag()      ) : single_tag_title();
-        elseif ( is_category() ) : single_cat_title();
-        else                     : echo '보관함';
-        endif;
-
-        /* Term Description */
+      if ( $heading ) :
+        echo $heading;
+      elseif ( is_archive() ) :
         $term_description = term_description();
-        if ( ! empty( $term_description ) ) : ?>
-          <small class="taxonomy-description"><?php echo $term_description; ?></small><?php
+        if ( empty( $term_description ) ) :
+          akaiv_page_title();
+        else :
+          akaiv_page_title();
+          echo '<small class="taxonomy-description">'.$term_description.'</small>';
         endif;
-
       else :
-        echo get_the_title();
-
+        akaiv_page_title();
       endif; ?>
     </h1>
   </header><?php
+}
+
+/* 페이지 제목 */
+function akaiv_page_title() {
+  if ( is_404() ) :
+    echo 'Not Found';
+
+  elseif ( is_search() ) :
+    printf( '검색 결과: %s', get_search_query() );
+
+  elseif ( is_archive()  ) :
+        if ( is_tax( 'post_format', 'post-format-aside'   ) ) : echo '추가 정보';
+    elseif ( is_tax( 'post_format', 'post-format-image'   ) ) : echo '이미지';
+    elseif ( is_tax( 'post_format', 'post-format-video'   ) ) : echo '비디오';
+    elseif ( is_tax( 'post_format', 'post-format-audio'   ) ) : echo '오디오';
+    elseif ( is_tax( 'post_format', 'post-format-quote'   ) ) : echo '인용';
+    elseif ( is_tax( 'post_format', 'post-format-link'    ) ) : echo '링크';
+    elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) : echo '갤러리';
+    elseif ( is_day()      ) : echo get_the_date();
+    elseif ( is_month()    ) : echo get_the_date( 'Y년 F' );
+    elseif ( is_year()     ) : echo get_the_date( 'Y년' );
+    elseif ( is_author()   ) : the_post(); echo get_the_author().'의 모든 글'; rewind_posts();
+    elseif ( is_tag()      ) : single_tag_title();
+    elseif ( is_category() ) : single_cat_title();
+    else                     : echo '보관함';
+    endif;
+
+  else :
+    echo get_the_title();
+
+  endif;
 }
 
 /* 보관함: 페이지네이션 */
