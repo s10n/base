@@ -1,4 +1,26 @@
 <?php
+/* <title> */
+function akaiv_wp_title( $title, $sep ) {
+  if ( is_feed() )
+    return $title;
+
+  $title            = akaiv_page_title();
+  $site_name        = get_bloginfo( 'name', 'display' );
+  $site_description = get_bloginfo( 'description', 'display' );
+
+  if ( is_home() || is_front_page() ) :
+    if ( ! $site_description ) : return;
+    else : $title = "$title $sep $site_description";
+    endif;
+
+  else :
+    $title = "$title $sep $site_name";
+
+  endif;
+  return $title;
+}
+add_filter( 'wp_title', 'akaiv_wp_title', 10, 2 );
+
 /* <head>: 파비콘, 메타 */
 function akaiv_head() { ?>
   <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/images/favicon/favicon.png">
@@ -24,28 +46,3 @@ function akaiv_head() { ?>
   <?php endif;
 }
 add_action('wp_head', 'akaiv_head');
-
-/* <title> */
-function akaiv_wp_title( $title, $sep ) {
-  if ( is_feed() )
-    return $title;
-
-  $title            = akaiv_page_title();
-  $site_name        = get_bloginfo( 'name', 'display' );
-  $site_description = get_bloginfo( 'description', 'display' );
-
-  if ( is_home() || is_front_page() ) :
-    if ( ! $site_description ) :
-      return;
-    else :
-      $title = "$title $sep $site_description";
-    endif;
-
-  else :
-    $title = "$title $sep $site_name";
-
-  endif;
-
-  return $title;
-}
-add_filter( 'wp_title', 'akaiv_wp_title', 10, 2 );
