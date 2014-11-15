@@ -1,4 +1,4 @@
-<?php akaiv_before_page(); ?>
+<?php akaiv_before_post(); ?>
 
 <?php
   akaiv_page_header();
@@ -10,4 +10,4 @@
 </div>
 <?php akaiv_edit_post_link(); ?>
 
-<?php akaiv_after_page(); ?>
+<?php akaiv_after_post(); ?>

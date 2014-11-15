@@ -1,4 +1,4 @@
-<?php akaiv_before_page(); ?>
+<?php akaiv_before_post( false ); ?>
 
 <?php akaiv_page_header( '찾을 수 없습니다.' ); ?>
 
@@ -17,4 +17,4 @@
   <?php get_search_form(); ?>
 </div>
 
-<?php akaiv_after_page(); ?>
+<?php akaiv_after_post(); ?>

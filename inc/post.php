@@ -1,11 +1,15 @@
 <?php
-/* 페이지 시작 */
-function akaiv_before_page() { ?>
+/* 시작 */
+function akaiv_before_post($post = true) {
+  if ( $post ) : ?>
   <article <?php post_class(); ?>><?php
+  else : ?>
+    <article class="hentry"><?php
+  endif;
 }
 
-/* 페이지 끝 */
-function akaiv_after_page() { ?>
+/* 끝 */
+function akaiv_after_post() { ?>
   </article><?php
 }
 
