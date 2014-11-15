@@ -57,8 +57,11 @@ function akaiv_page_title() {
     else                     : echo '보관함';
     endif;
 
-  else :
+  elseif ( is_singular() ) :
     echo get_the_title();
+
+  else :
+    echo get_bloginfo( 'name', 'display' );
 
   endif;
 }
