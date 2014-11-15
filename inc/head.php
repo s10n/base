@@ -57,3 +57,4 @@ remove_action( 'wp_head', 'wp_shortlink_wp_head' );
 remove_action( 'template_redirect', 'wp_shortlink_header', 11 );
 remove_action( 'wp_head', 'feed_links', 2 );
 remove_action( 'wp_head', 'feed_links_extra', 3 );
+remove_action( 'wp_head', 'wp_generator' );
