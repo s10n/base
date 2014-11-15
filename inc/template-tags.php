@@ -50,12 +50,12 @@ function akaiv_page_title() {
     elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) : echo '갤러리';
     elseif ( is_tax( 'post_format', 'post-format-status'  ) ) : echo '상태';
     elseif ( is_tax( 'post_format', 'post-format-chat'    ) ) : echo '챗';
-    elseif ( is_day()      ) : echo get_the_date();
-    elseif ( is_month()    ) : echo get_the_date( 'Y년 F' );
-    elseif ( is_year()     ) : echo get_the_date( 'Y년' );
-    elseif ( is_author()   ) : the_post(); echo get_the_author().'의 모든 글'; rewind_posts();
-    elseif ( is_tag()      ) : single_tag_title();
     elseif ( is_category() ) : single_cat_title();
+    elseif ( is_tag()      ) : single_tag_title();
+    elseif ( is_author()   ) : the_post(); echo get_the_author().'의 모든 글'; rewind_posts();
+    elseif ( is_year()     ) : echo get_the_date( 'Y년' );
+    elseif ( is_month()    ) : echo get_the_date( 'Y년 F' );
+    elseif ( is_day()      ) : echo get_the_date();
     else                     : echo '보관함';
     endif;
 
