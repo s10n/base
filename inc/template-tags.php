@@ -40,7 +40,7 @@ function akaiv_page_title() {
   elseif ( is_search() ) :
     printf( '검색 결과: %s', get_search_query() );
 
-  elseif ( is_archive()  ) :
+  elseif ( is_archive() ) :
         if ( is_tax( 'post_format', 'post-format-aside'   ) ) : echo '추가 정보';
     elseif ( is_tax( 'post_format', 'post-format-image'   ) ) : echo '이미지';
     elseif ( is_tax( 'post_format', 'post-format-video'   ) ) : echo '비디오';
@@ -66,6 +66,32 @@ function akaiv_page_title() {
     echo get_bloginfo( 'name', 'display' );
 
   endif;
+}
+
+/* 페이지 주소 */
+function akaiv_url() {
+  if ( is_search() ) :
+    $canonical = get_search_link();
+
+  elseif ( is_archive() ) :
+        if ( is_tax( 'post_format' ) ) : $canonical = get_term_link( get_query_var( 'post_format' ), 'post_format' );
+    elseif ( is_category()           ) : $canonical = get_term_link( get_query_var( 'cat' ), 'category' );
+    elseif ( is_tag()                ) : $canonical = get_term_link( get_query_var( 'tag' ), 'post_tag' );
+    elseif ( is_author()             ) : $canonical = get_author_posts_url( get_query_var( 'author' ), get_query_var( 'author_name' ) );
+    elseif ( is_year()               ) : $canonical = get_year_link(  get_query_var( 'year' ) );
+    elseif ( is_month()              ) : $canonical = get_month_link( get_query_var( 'year' ), get_query_var( 'monthnum' ) );
+    elseif ( is_day()                ) : $canonical = get_day_link(   get_query_var( 'year' ), get_query_var( 'monthnum' ), get_query_var( 'day' ) );
+    else                               : $canonical = '';
+    endif;
+
+  elseif ( is_singular() ) :
+    $canonical = get_permalink();
+
+  else :
+    $canonical = home_url( '/' );
+
+  endif;
+  echo esc_url( $canonical );
 }
 
 /* 보관함: 페이지네이션 */
