@@ -9,7 +9,7 @@ function akaiv_after_page() { ?>
   </article><?php
 }
 
-/* 글: 제목 */
+/* 제목 */
 function akaiv_the_title() {
   $title = trim(get_the_title());
   if ( ! $title ) $title = '(제목이 없는 글)';
@@ -51,29 +51,28 @@ function the_post_thumbnail_srcset($size1x, $size2x) {
   the_post_thumbnail($size1x, $attr);
 }
 
-/* 글: 메타 */
-function akaiv_post_meta($str = null) {
-  if ( ! $str ) :
-    return;
+/* 메타 */
+function akaiv_post_meta($meta = null) {
+  if ( ! $meta ) return;
 
-  elseif ( $str == 'category' ) : ?>
+  if ( $meta == 'category' ) : ?>
     <span class="cat-links"><i class="fa fa-fw fa-folder-open"></i> <?php echo get_the_category_list( ', ' ); ?></span><?php
 
-  elseif ( $str == 'tag' ) :
+  elseif ( $meta == 'tag' ) :
     if ( has_tag() ) : ?>
-      <span class="tag-links"><i class="fa fa-fw fa-tag"></i> <?php the_tags('', ', ', ''); ?></span><?php
+      <span class="tag-links"><i class="fa fa-fw fa-tag"></i> <?php the_tags( '', ', ', '' ); ?></span><?php
     endif;
 
-  elseif ( $str == 'date' ) : ?>
+  elseif ( $meta == 'date' ) : ?>
     <span class="posted-on"><i class="fa fa-fw fa-clock-o"></i> <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><time class="entry-date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ) ?></time></a></span><?php
 
-  elseif ( $str == 'author' ) : ?>
+  elseif ( $meta == 'author' ) : ?>
     <span class="author"><i class="fa fa-fw fa-user"></i> <a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author"><?php echo get_the_author(); ?></a></span><?php
 
   endif;
 }
 
-/* 글: 편집 링크 */
+/* 편집 링크 */
 function akaiv_edit_post_link() {
   if ( is_single() ) :
     edit_post_link( '편집', '<span class="edit-link"><i class="fa fa-fw fa-pencil"></i> ', '</span>' );
@@ -82,14 +81,11 @@ function akaiv_edit_post_link() {
   endif;
 }
 
-/* 글: 내비게이션 버튼 */
+/* 내비게이션 버튼 */
 function akaiv_post_nav() {
-  // Don't print empty markup if there's nowhere to navigate.
   $previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
   $next     = get_adjacent_post( false, '', false );
-
   if ( ! $next && ! $previous ) return; ?>
-
   <nav class="navigation post-navigation" role="navigation">
     <h1 class="screen-reader-text"><?php echo 'Post navigation'; ?></h1>
     <div class="nav-links"><?php
