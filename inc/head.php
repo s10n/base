@@ -79,8 +79,21 @@ function akaiv_head() { ?>
     <meta property="og:title" content="<?php akaiv_title(); ?>">
     <meta property="og:url" content="<?php akaiv_url(); ?>">
     <meta property="og:type" content="article"><?php
+    $queried_object = get_queried_object();
     if ( is_single() ) :
       $excerpt = strip_tags(get_the_excerpt());
+
+      if ( ! $excerpt ) :
+        $text = $queried_object->post_content;
+        $text = strip_shortcodes( $text );
+        $text = apply_filters( 'the_content', $text );
+        $text = str_replace(']]>', ']]&gt;', $text);
+        $excerpt_length = apply_filters( 'excerpt_length', 55 );
+        $excerpt_more = apply_filters( 'excerpt_more', ' ' . '&hellip;' );
+        $text = wp_trim_words( $text, $excerpt_length, $excerpt_more );
+        $excerpt = $text;
+      endif;
+
       $section = get_the_category()[0]->cat_name;
       $tags    = get_the_tags();
       if ( $excerpt ) : ?>
@@ -92,7 +105,7 @@ function akaiv_head() { ?>
         <meta property="article:tag" content="<?php echo $tag->name; ?>">
       <?php endforeach;
     endif;
-    $author_id     = get_queried_object()->post_author;
+    $author_id     = $queried_object->post_author;
     $author        = get_the_author_meta( 'display_name', $author_id );
     $time          = esc_attr( get_the_date( 'c' ) );
     $thumbnail_src = akaiv_get_post_thumbnail_src();
