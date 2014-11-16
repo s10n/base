@@ -9,7 +9,7 @@ function akaiv_setup_theme() {
   add_theme_support( 'html5', array( 'search-form', 'gallery', 'caption' ) );
   // add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'audio', 'quote', 'link', 'gallery' ) );
   add_filter( 'use_default_gallery_style', '__return_false' );
-  add_editor_style( 'css/main.css' );
+  add_editor_style( 'css/style.css' );
   show_admin_bar( false );
   // load_theme_textdomain( 'project', get_template_directory() . '/languages' );
 }
