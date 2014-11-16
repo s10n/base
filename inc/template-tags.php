@@ -122,6 +122,11 @@ function akaiv_paginate_links() {
   endif;
 }
 
+/* 타이틀 */
+function akaiv_title() {
+  wp_title( '|', true, 'right');
+}
+
 /* 메타: 루프 바깥에서 */
 function akaiv_meta($meta = null) {
   if ( ! $meta ) return;

@@ -17,9 +17,11 @@
   <div class="entry-content">
     <?php the_content(); ?>
   </div>
-  <div class="entry-meta">
-    <span class="tag-links"><?php the_tags('', ' ', ''); ?></span>
-  </div>
+  <?php if ( has_tag() ) : ?>
+    <div class="entry-meta">
+      <span class="tag-links"><?php the_tags('', ' ', ''); ?></span>
+    </div>
+  <?php endif; ?>
 
 <?php else : /* 목록 */ ?>
 

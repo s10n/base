@@ -47,4 +47,4 @@
 </header><!-- #masthead -->
 
 <div id="main" class="site-main">
-  <?php if ( !is_front_page() ) echo '<div class="container">'; ?>
+  <?php if ( ! is_home() && ! is_front_page() ) echo '<div class="container">'; ?>

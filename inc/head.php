@@ -1,8 +1,5 @@
 <?php
 /* <title> */
-function akaiv_title() {
-  wp_title( '|', true, 'right');
-}
 function akaiv_wp_title( $title, $sep ) {
   if ( is_feed() )
     return $title;
