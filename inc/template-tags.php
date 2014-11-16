@@ -1,5 +1,4 @@
 <?php
-
 /* 본문 영역 시작 */
 function akaiv_before_content() {
   // get_sidebar(); ?>
@@ -121,4 +120,64 @@ function akaiv_paginate_links() {
     endif;
     echo '</nav>';
   endif;
+}
+
+/* 메타: 루프 바깥에서 */
+function akaiv_meta($meta = null) {
+  if ( ! $meta ) return;
+
+  if ( $meta == 'title' ) :
+    akaiv_title();
+
+  elseif ( $meta == 'url' ) :
+    akaiv_url();
+
+  elseif ( $meta == 'description' ) :
+    $excerpt = strip_tags(get_the_excerpt());
+    if ( ! $excerpt ) :
+      $queried_object = get_queried_object();
+      $excerpt = akaiv_trim_excerpt( $queried_object->post_content );
+    endif;
+    echo $excerpt;
+
+  elseif ( $meta == 'section' ) :
+    echo get_the_category()[0]->cat_name;
+
+  elseif ( $meta == 'tags' ) :
+    return get_the_tags();
+
+  elseif ( $meta == 'time' ) :
+    echo esc_attr( get_the_date( 'c' ) );
+
+  elseif ( $meta == 'author' ) :
+    $queried_object = get_queried_object();
+    $author_id = $queried_object->post_author;
+    echo get_the_author_meta( 'display_name', $author_id );
+
+  elseif ( $meta == 'image' ) :
+    $fb_image = get_template_directory_uri().'/images/fb-image.jpg';
+    if ( is_singular() ) :
+      $thumbnail_src = akaiv_get_post_thumbnail_src();
+      $image         = ( $thumbnail_src ) ? $thumbnail_src : $fb_image;
+    else :
+      $image = $fb_image;
+    endif;
+    echo $image;
+
+  else :
+    return;
+
+  endif;
+}
+
+/* 요약 생성 */
+function akaiv_trim_excerpt($text = '') {
+  /** wp-includes/formatting.php에서 wp_trim_excerpt() 함수를 복제 */
+  $text = strip_shortcodes( $text );
+  $text = apply_filters( 'the_content', $text );
+  $text = str_replace(']]>', ']]&gt;', $text);
+  $excerpt_length = apply_filters( 'excerpt_length', 55 );
+  $excerpt_more = apply_filters( 'excerpt_more', ' ' . '&hellip;' );
+  $text = wp_trim_words( $text, $excerpt_length, $excerpt_more );
+  return $text;
 }

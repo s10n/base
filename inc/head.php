@@ -55,76 +55,50 @@ function akaiv_head() { ?>
   <meta name="application-name" content="<?php bloginfo( 'name' ); ?>">
 
   <!-- 검색엔진최적화 - http://simcheolhwan.com -->
-  <?php $fb_image = get_template_directory_uri().'/images/fb-image.jpg'; ?>
-
   <?php if ( is_404() ) : ?>
     <meta name="robots" content="noindex,follow">
-    <meta property="og:title" content="<?php akaiv_title(); ?>">
+    <meta property="og:title" content="<?php akaiv_meta( 'title' ); ?>">
     <meta property="og:type" content="object">
 
   <?php elseif ( is_search() ) : ?>
     <meta name="robots" content="noindex,follow">
-    <link rel="canonical" href="<?php akaiv_url(); ?>">
-    <meta property="og:title" content="<?php akaiv_title(); ?>">
-    <meta property="og:url" content="<?php akaiv_url(); ?>">
+    <link rel="canonical" href="<?php akaiv_meta( 'url' ); ?>">
+    <meta property="og:title" content="<?php akaiv_meta( 'title' ); ?>">
+    <meta property="og:url" content="<?php akaiv_meta( 'url' ); ?>">
     <meta property="og:type" content="object">
 
   <?php elseif ( is_archive() ) : ?>
-    <link rel="canonical" href="<?php akaiv_url(); ?>">
-    <meta property="og:title" content="<?php akaiv_title(); ?>">
-    <meta property="og:url" content="<?php akaiv_url(); ?>">
+    <link rel="canonical" href="<?php akaiv_meta( 'url' ); ?>">
+    <meta property="og:title" content="<?php akaiv_meta( 'title' ); ?>">
+    <meta property="og:url" content="<?php akaiv_meta( 'url' ); ?>">
     <meta property="og:type" content="object">
 
   <?php elseif ( is_singular() ) : ?>
-    <meta property="og:title" content="<?php akaiv_title(); ?>">
-    <meta property="og:url" content="<?php akaiv_url(); ?>">
-    <meta property="og:type" content="article"><?php
-    $queried_object = get_queried_object();
-    if ( is_single() ) :
-      $excerpt = strip_tags(get_the_excerpt());
-
-      if ( ! $excerpt ) :
-        $text = $queried_object->post_content;
-        $text = strip_shortcodes( $text );
-        $text = apply_filters( 'the_content', $text );
-        $text = str_replace(']]>', ']]&gt;', $text);
-        $excerpt_length = apply_filters( 'excerpt_length', 55 );
-        $excerpt_more = apply_filters( 'excerpt_more', ' ' . '&hellip;' );
-        $text = wp_trim_words( $text, $excerpt_length, $excerpt_more );
-        $excerpt = $text;
-      endif;
-
-      $section = get_the_category()[0]->cat_name;
-      $tags    = get_the_tags();
-      if ( $excerpt ) : ?>
-        <meta name="description" content="<?php echo $excerpt; ?>">
-        <meta property="og:description" content="<?php echo $excerpt; ?>"><?php
-      endif; ?>
-      <meta property="article:section" content="<?php echo $section; ?>">
-      <?php foreach ($tags as $tag) : ?>
+    <meta property="og:title" content="<?php akaiv_meta( 'title' ); ?>">
+    <meta property="og:url" content="<?php akaiv_meta( 'url' ); ?>">
+    <meta property="og:type" content="article">
+    <?php if ( is_single() ) : ?>
+      <meta name="description" content="<?php akaiv_meta( 'description' ); ?>">
+      <meta property="og:description" content="<?php akaiv_meta( 'description' ); ?>">
+      <meta property="article:section" content="<?php akaiv_meta( 'section' ); ?>">
+      <?php foreach ( akaiv_meta( 'tags' ) as $tag ) : ?>
         <meta property="article:tag" content="<?php echo $tag->name; ?>">
-      <?php endforeach;
-    endif;
-    $author_id     = $queried_object->post_author;
-    $author        = get_the_author_meta( 'display_name', $author_id );
-    $time          = esc_attr( get_the_date( 'c' ) );
-    $thumbnail_src = akaiv_get_post_thumbnail_src();
-    $image         = ( $thumbnail_src ) ? $thumbnail_src : $fb_image; ?>
-    <meta property="article:published_time" content="<?php echo $time; ?>">
-    <meta property="article:author" content="<?php echo $author; ?>">
+      <?php endforeach; ?>
+    <?php endif; ?>
+    <meta property="article:published_time" content="<?php akaiv_meta( 'time' ); ?>">
+    <meta property="article:author" content="<?php akaiv_meta( 'author' ); ?>">
 
   <?php else : ?>
-    <link rel="canonical" href="<?php akaiv_url(); ?>">
+    <link rel="canonical" href="<?php akaiv_meta( 'url' ); ?>">
     <meta name="description" content="<?php bloginfo( 'description' ); ?>">
     <meta property="og:description" content="<?php bloginfo( 'description' ); ?>">
     <meta property="og:type" content="website">
 
   <?php endif; ?>
 
-  <?php if ( ! is_singular() ) $image = $fb_image; ?>
   <meta property="og:site_name" content="<?php bloginfo( 'name' ); ?>">
-  <meta property="og:image" content="<?php echo $image; ?>">
-  <meta property="og:locale" content="<?php echo bloginfo( 'language' ); ?>">
+  <meta property="og:image" content="<?php akaiv_meta( 'image' ); ?>">
+  <meta property="og:locale" content="<?php bloginfo( 'language' ); ?>">
   <!-- / 검색엔진최적화 --><?php
 }
 add_action('wp_head', 'akaiv_head');
