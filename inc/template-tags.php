@@ -17,13 +17,8 @@ function akaiv_page_header($heading = null) { ?>
       if ( $heading ) :
         echo $heading;
       elseif ( is_archive() ) :
-        $term_description = term_description();
-        if ( empty( $term_description ) ) :
-          akaiv_page_title();
-        else :
-          akaiv_page_title();
-          echo '<small class="taxonomy-description">'.$term_description.'</small>';
-        endif;
+        akaiv_page_title();
+        akaiv_the_archive_description( '<small class="taxonomy-description">', '</small>' );
       else :
         akaiv_page_title();
       endif; ?>
@@ -33,64 +28,86 @@ function akaiv_page_header($heading = null) { ?>
 
 /* 페이지 제목 */
 function akaiv_page_title() {
-  if ( is_404() ) :
-    echo 'Not Found';
-
-  elseif ( is_search() ) :
-    printf( '검색 결과: %s', get_search_query() );
-
-  elseif ( is_archive() ) :
-        if ( is_tax( 'post_format', 'post-format-aside'   ) ) : echo '추가 정보';
-    elseif ( is_tax( 'post_format', 'post-format-image'   ) ) : echo '이미지';
-    elseif ( is_tax( 'post_format', 'post-format-video'   ) ) : echo '비디오';
-    elseif ( is_tax( 'post_format', 'post-format-audio'   ) ) : echo '오디오';
-    elseif ( is_tax( 'post_format', 'post-format-quote'   ) ) : echo '인용';
-    elseif ( is_tax( 'post_format', 'post-format-link'    ) ) : echo '링크';
-    elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) : echo '갤러리';
-    elseif ( is_tax( 'post_format', 'post-format-status'  ) ) : echo '상태';
-    elseif ( is_tax( 'post_format', 'post-format-chat'    ) ) : echo '챗';
-    elseif ( is_category() ) : single_cat_title();
-    elseif ( is_tag()      ) : single_tag_title();
-    elseif ( is_author()   ) : the_post(); echo get_the_author().'의 모든 글'; rewind_posts();
-    elseif ( is_year()     ) : echo get_the_date( 'Y년' );
-    elseif ( is_month()    ) : echo get_the_date( 'Y년 F' );
-    elseif ( is_day()      ) : echo get_the_date();
-    else                     : echo '보관함';
-    endif;
-
-  elseif ( is_singular() ) :
-    echo get_the_title();
-
-  else :
-    echo get_bloginfo( 'name', 'display' );
-
+      if ( is_404()      ) : echo 'Not Found';
+  elseif ( is_search()   ) : printf( '검색 결과: %s', get_search_query() );
+  elseif ( is_archive()  ) : akaiv_the_archive_title();
+  elseif ( is_singular() ) : the_title();
+  else : bloginfo( 'name' );
   endif;
+}
+
+/* 보관함 제목 */
+function akaiv_the_archive_title() {
+  $title = akaiv_get_the_archive_title();
+  if ( ! empty( $title ) ) :
+    echo $title;
+  endif;
+}
+function akaiv_get_the_archive_title() {
+      if ( is_category() ) : $title = sprintf( single_cat_title( '', false ) );
+  elseif ( is_tag()      ) : $title = sprintf( '태그: %s', single_tag_title( '', false ) );
+  elseif ( is_author()   ) : $title = sprintf( get_the_author() . '의 모든 글' );
+  elseif ( is_year()     ) : $title = sprintf( get_the_date( 'Y년' ) );
+  elseif ( is_month()    ) : $title = sprintf( get_the_date( 'Y년 F' ) );
+  elseif ( is_day()      ) : $title = sprintf( get_the_date( 'Y년 F j일') );
+  elseif ( is_tax( 'post_format', 'post-format-aside'   ) ) : $title = '추가 정보';
+  elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) : $title = '갤러리';
+  elseif ( is_tax( 'post_format', 'post-format-image'   ) ) : $title = '이미지';
+  elseif ( is_tax( 'post_format', 'post-format-video'   ) ) : $title = '비디오';
+  elseif ( is_tax( 'post_format', 'post-format-quote'   ) ) : $title = '인용';
+  elseif ( is_tax( 'post_format', 'post-format-link'    ) ) : $title = '링크';
+  elseif ( is_tax( 'post_format', 'post-format-status'  ) ) : $title = '상태';
+  elseif ( is_tax( 'post_format', 'post-format-audio'   ) ) : $title = '오디오';
+  elseif ( is_tax( 'post_format', 'post-format-chat'    ) ) : $title = '챗';
+  elseif ( is_post_type_archive() ) :
+    $title = sprintf( '보관함: %s', post_type_archive_title( '', false ) );
+  elseif ( is_tax() ) :
+    $tax = get_taxonomy( get_queried_object()->taxonomy );
+    $title = sprintf( '%1$s: %2$s', $tax->labels->singular_name, single_term_title( '', false ) );
+  else :
+    $title = '보관함';
+  endif;
+
+  return $title;
+}
+
+/* 보관함 설명 */
+function akaiv_the_archive_description( $before = '', $after = '' ) {
+  $description = akaiv_get_the_archive_description();
+  if ( ! empty( $description ) ) :
+    echo $before . $description . $after;
+  endif;
+}
+function akaiv_get_the_archive_description() {
+  return term_description();
 }
 
 /* 페이지 주소 */
 function akaiv_url() {
-  if ( is_search() ) :
-    $canonical = get_search_link();
-
-  elseif ( is_archive() ) :
-        if ( is_tax( 'post_format' ) ) : $canonical = get_term_link( get_query_var( 'post_format' ), 'post_format' );
-    elseif ( is_category()           ) : $canonical = get_term_link( get_query_var( 'cat' ), 'category' );
-    elseif ( is_tag()                ) : $canonical = get_term_link( get_query_var( 'tag' ), 'post_tag' );
-    elseif ( is_author()             ) : $canonical = get_author_posts_url( get_query_var( 'author' ), get_query_var( 'author_name' ) );
-    elseif ( is_year()               ) : $canonical = get_year_link(  get_query_var( 'year' ) );
-    elseif ( is_month()              ) : $canonical = get_month_link( get_query_var( 'year' ), get_query_var( 'monthnum' ) );
-    elseif ( is_day()                ) : $canonical = get_day_link(   get_query_var( 'year' ), get_query_var( 'monthnum' ), get_query_var( 'day' ) );
-    else                               : $canonical = '';
-    endif;
-
-  elseif ( is_singular() ) :
-    $canonical = get_permalink();
-
-  else :
-    $canonical = home_url( '/' );
-
+      if ( is_search()   ) : $canonical = get_search_link();
+  elseif ( is_archive()  ) : $canonical = akaiv_get_archive_url();
+  elseif ( is_singular() ) : $canonical = get_permalink();
+  else : $canonical = home_url( '/' );
   endif;
+
   echo esc_url( $canonical );
+}
+
+/* 보관함 주소 */
+function akaiv_get_archive_url() {
+      if ( is_category() ) : $canonical = get_term_link( get_query_var( 'cat' ), 'category' );
+  elseif ( is_tag()      ) : $canonical = get_term_link( get_query_var( 'tag' ), 'post_tag' );
+  elseif ( is_author()   ) : $canonical = get_author_posts_url( get_query_var( 'author' ), get_query_var( 'author_name' ) );
+  elseif ( is_year()     ) : $canonical = get_year_link(  get_query_var( 'year' ) );
+  elseif ( is_month()    ) : $canonical = get_month_link( get_query_var( 'year' ), get_query_var( 'monthnum' ) );
+  elseif ( is_day()      ) : $canonical = get_day_link(   get_query_var( 'year' ), get_query_var( 'monthnum' ), get_query_var( 'day' ) );
+  elseif ( is_tax( 'post_format' ) ) :
+    $canonical = get_term_link( get_query_var( 'post_format' ), 'post_format' );
+  else :
+    $canonical = '';
+  endif;
+
+  return $canonical;
 }
 
 /* 보관함: 페이지네이션 */

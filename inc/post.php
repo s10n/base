@@ -2,7 +2,7 @@
 /* 시작 */
 function akaiv_before_post($post = true) {
   if ( $post ) : ?>
-  <article <?php post_class(); ?>><?php
+    <article <?php post_class(); ?>><?php
   else : ?>
     <article class="hentry"><?php
   endif;
