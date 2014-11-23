@@ -76,19 +76,23 @@ function akaiv_the_post_thumbnail_srcset($size1x, $size2x) {
 function akaiv_post_meta($meta = null) {
   if ( ! $meta ) return;
 
-  if ( $meta == 'category' ) : ?>
-    <span class="cat-links"><i class="fa fa-fw fa-folder-open"></i> <?php echo get_the_category_list( ', ' ); ?></span><?php
+  if ( $meta == 'category' ) :
+    $categories_list = get_the_category_list( ', ' );
+    if ( $categories_list ) : ?>
+      <span class="cat-links"><i class="fa fa-fw fa-folder-open"></i> <?php echo $categories_list; ?></span><?php
+    endif;
 
   elseif ( $meta == 'tag' ) :
-    if ( has_tag() ) : ?>
-      <span class="tag-links"><i class="fa fa-fw fa-tag"></i> <?php the_tags( '', ', ', '' ); ?></span><?php
+    $tags_list = get_the_tag_list( '', ', ', '' );
+    if ( $tags_list ) : ?>
+      <span class="tag-links"><i class="fa fa-fw fa-tag"></i> <?php echo $tags_list; ?></span><?php
     endif;
 
   elseif ( $meta == 'date' ) : ?>
-    <span class="posted-on"><i class="fa fa-fw fa-clock-o"></i> <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><time class="entry-date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ) ?></time></a></span><?php
+    <span class="posted-on"><i class="fa fa-fw fa-clock-o"></i> <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><time class="entry-date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time></a></span><?php
 
   elseif ( $meta == 'author' ) : ?>
-    <span class="author"><i class="fa fa-fw fa-user"></i> <a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author"><?php echo get_the_author(); ?></a></span><?php
+    <span class="author"><i class="fa fa-fw fa-user"></i> <a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author"><?php echo esc_html( get_the_author() ); ?></a></span><?php
 
   endif;
 }
