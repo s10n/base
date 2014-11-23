@@ -22,3 +22,9 @@ function akaiv_post_class( $classes ) {
   return $classes;
 }
 add_filter( 'post_class', 'akaiv_post_class' );
+
+/* 검색폼: submit 버튼에 .screen-reader-text 추가 */
+function akaiv_search_form_modify( $html ) {
+  return str_replace( 'class="search-submit"', 'class="search-submit screen-reader-text"', $html );
+}
+add_filter( 'get_search_form', 'akaiv_search_form_modify' );
