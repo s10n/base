@@ -1,5 +1,5 @@
   <?php if ( ! is_home() && ! is_front_page() ) echo '</div><!-- .container -->'; ?>
-</div><!-- #main -->
+</main><!-- .site-main -->
 
 <footer id="colophon" class="site-footer" role="contentinfo">
   <div class="container">
@@ -15,7 +15,7 @@
       </p>
     </div><!-- .site-info -->
   </div><!-- .container -->
-</footer><!-- #colophon -->
+</footer><!-- .site-footer -->
 
 <?php wp_footer(); ?>
 </body>

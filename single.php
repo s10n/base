@@ -3,12 +3,10 @@ get_header();
 akaiv_before_content(); ?>
 
 <?php
-  if ( have_posts() ) :
-    while ( have_posts() ) : the_post();
-      get_template_part( 'templates/content' );
-      akaiv_post_nav();
-    endwhile;
-  endif;
+while ( have_posts() ) : the_post();
+  get_template_part( 'templates/content' );
+  akaiv_post_nav();
+endwhile;
 ?>
 
 <?php
