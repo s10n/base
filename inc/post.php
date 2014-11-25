@@ -73,37 +73,42 @@ function akaiv_the_post_thumbnail_srcset($size1x, $size2x) {
 }
 
 /* 메타 */
-function akaiv_post_meta($meta = null) {
+function akaiv_post_meta($meta = null, $icon = '') {
   if ( ! $meta ) return;
+  if ( ! empty($icon) ) $icon = '<i class="fa fa-fw '.$icon.'"></i> ';
 
   if ( $meta == 'category' ) :
     $categories_list = get_the_category_list( ', ' );
     if ( $categories_list ) : ?>
-      <span class="cat-links"><i class="fa fa-fw fa-folder-open"></i> <?php echo $categories_list; ?></span><?php
+      <span class="cat-links"><?php echo $icon.$categories_list; ?></span><?php
     endif;
 
   elseif ( $meta == 'tag' ) :
     $tags_list = get_the_tag_list( '', ', ', '' );
     if ( $tags_list ) : ?>
-      <span class="tag-links"><i class="fa fa-fw fa-tag"></i> <?php echo $tags_list; ?></span><?php
+      <span class="tag-links"><?php echo $icon.$tags_list; ?></span><?php
     endif;
 
   elseif ( $meta == 'date' ) : ?>
-    <span class="posted-on"><i class="fa fa-fw fa-clock-o"></i> <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><time class="entry-date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time></a></span><?php
+    <span class="posted-on"><?php echo $icon; ?><a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><time class="entry-date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time></a></span><?php
 
   elseif ( $meta == 'author' ) : ?>
-    <span class="author"><i class="fa fa-fw fa-user"></i> <a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author"><?php echo esc_html( get_the_author() ); ?></a></span><?php
+    <span class="author"><?php echo $icon; ?><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author"><?php echo esc_html( get_the_author() ); ?></a></span><?php
 
   endif;
 }
 
 /* 편집 링크 */
-function akaiv_edit_post_link() {
-  if ( is_single() ) :
-    edit_post_link( '편집', '<span class="edit-link"><i class="fa fa-fw fa-pencil"></i> ', '</span>' );
-  else :
-    edit_post_link( '편집', '<div class="text-right"><span class="edit-link">', '</span></div>' );
+function akaiv_edit_post_link($right = false, $icon = '') {
+  if ( ! empty($icon) )
+    $icon = '<i class="fa fa-fw '.$icon.'"></i> ';
+  $before = '<span class="edit-link">'.$icon;
+  $after = '</span>';
+  if ( $right ) :
+    $before = '<div class="text-right">'.$before;
+    $after = $after.'</div>';
   endif;
+  edit_post_link( '편집', $before, $after );
 }
 
 /* 내비게이션 버튼 */

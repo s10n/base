@@ -7,10 +7,10 @@
       <?php akaiv_the_title(); ?>
     </h1>
     <div class="entry-meta">
-      <?php akaiv_post_meta( 'category' ); ?>
-      <?php akaiv_post_meta( 'date' ); ?>
-      <?php akaiv_post_meta( 'author' ); ?>
-      <?php akaiv_edit_post_link(); ?>
+      <?php akaiv_post_meta( 'category', 'fa-folder-open' ); ?>
+      <?php akaiv_post_meta( 'date', 'fa-clock-o' ); ?>
+      <?php akaiv_post_meta( 'author', 'fa-user' ); ?>
+      <?php akaiv_edit_post_link( false, 'fa-pencil' ); ?>
     </div>
   </header>
   <?php akaiv_post_thumbnail(); ?>
