@@ -58,18 +58,16 @@ function akaiv_the_post_thumbnail_placeholder($size = 'thumbnail', $filename = '
   echo '<img src="'.$src.'" alt="'.$alt.'" '.$hwstring.'class="'.$class.'" srcset="'.$srcset.'">';
 }
 
-/* 썸네일: 소스 */
-function akaiv_get_post_thumbnail_src($size = 'full') {
-  $post_thumbnail_id = get_post_thumbnail_id();
-  $image = wp_get_attachment_image_src( $post_thumbnail_id, $size );
-  list( $src, $width, $height ) = $image;
-  return $src;
-}
-
 /* 썸네일: 레티나 */
 function akaiv_the_post_thumbnail_srcset($size1x, $size2x) {
   $attr = array( 'srcset' => akaiv_get_post_thumbnail_src( $size2x ).' 2x' );
   the_post_thumbnail( $size1x, $attr );
+}
+
+/* 썸네일: 소스 */
+function akaiv_get_post_thumbnail_src($size = 'full') {
+  $post_thumbnail_id = get_post_thumbnail_id();
+  return akaiv_get_attachment_image_src( $post_thumbnail_id, $size );
 }
 
 /* 첨부 이미지: 소스 */
