@@ -115,6 +115,19 @@ module.exports = function (grunt) {
       }
     },
 
+    modernizr: {
+      dist: {
+        "devFile" : "assets/modernizr/modernizr.js",
+        "outputFile" : "js/modernizr.min.js",
+        "extra" : {
+          "shiv" : false,
+        },
+        "files" : {
+          "src": ['js/project.js', 'css/style.min.css']
+        }
+      }
+    },
+
     watch: {
       less: {
         files: ['less/**/*.less', 'style/**/*.less'],
@@ -146,8 +159,8 @@ module.exports = function (grunt) {
   grunt.registerTask('default',   ['dev']);
 
   // Resister tasks: production
-  grunt.registerTask('build-js',  ['dist-js']);
+  grunt.registerTask('build-js',  ['dist-js', 'modernizr']);
   grunt.registerTask('build-css', ['dist-css']);
-  grunt.registerTask('build',     ['clean', 'dist-js', 'dist-css']);
+  grunt.registerTask('build',     ['clean', 'dist-js', 'dist-css', 'modernizr']);
 
 };
