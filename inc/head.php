@@ -41,6 +41,7 @@ function akaiv_head() { ?>
     <meta property="og:type" content="object">
 
   <?php elseif ( is_archive() ) : ?>
+    <meta name="robots" content="noindex,follow">
     <link rel="canonical" href="<?php akaiv_meta( 'url' ); ?>">
     <meta property="og:title" content="<?php akaiv_meta( 'title' ); ?>">
     <meta property="og:url" content="<?php akaiv_meta( 'url' ); ?>">
