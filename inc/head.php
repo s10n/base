@@ -72,6 +72,11 @@ function akaiv_head() { ?>
 
   <meta property="og:site_name" content="<?php bloginfo( 'name' ); ?>">
   <meta property="og:image" content="<?php akaiv_meta( 'image' ); ?>">
+  <?php if ( is_singular() ) : ?>
+    <?php foreach ( akaiv_meta( 'attachment_images' ) as $attachment_image ) : ?>
+      <meta property="og:image" content="<?php echo $attachment_image; ?>">
+    <?php endforeach; ?>
+  <?php endif; ?>
   <meta property="og:locale" content="<?php bloginfo( 'language' ); ?>">
   <!-- / 검색엔진최적화 -->
 

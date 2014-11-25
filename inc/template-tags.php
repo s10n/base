@@ -188,6 +188,22 @@ function akaiv_meta($meta = null) {
     endif;
     echo $image;
 
+  elseif ( $meta == 'attachment_images' ) :
+    $queried_object = get_queried_object();
+    $args = array(
+      'post_type'      => 'attachment',
+      'posts_per_page' => -1,
+      'post_parent'    => $queried_object->ID
+    );
+    $attachments = get_posts( $args );
+    $attachment_images = array();
+    if ( $attachments ) :
+      foreach ( $attachments as $attachment ) :
+        $attachment_images[] = akaiv_get_attachment_image_src( $attachment->ID, 'full' );
+      endforeach;
+    endif;
+    return $attachment_images;
+
   else :
     return;
 

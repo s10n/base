@@ -72,6 +72,13 @@ function akaiv_the_post_thumbnail_srcset($size1x, $size2x) {
   the_post_thumbnail( $size1x, $attr );
 }
 
+/* 첨부 이미지: 소스 */
+function akaiv_get_attachment_image_src($attachment_id, $size = 'full') {
+  $image = wp_get_attachment_image_src( $attachment_id, $size );
+  list( $src, $width, $height ) = $image;
+  return $src;
+}
+
 /* 메타 */
 function akaiv_post_meta($meta = null, $icon = '') {
   if ( ! $meta ) return;
