@@ -23,3 +23,34 @@
 @font-family-serif:
   Georgia, "Times New Roman", Times,
   serif;
+
+// font-weight: @bold;
+strong,
+dt, kbd kbd,
+label, .label {
+  &:extend(.strong);
+}
+
+// font-weight: @normal;
+.fwn,
+.btn-link,
+.radio label,  .checkbox label,
+.radio-inline, .checkbox-inline,
+.input-group-addon,
+.dropdown-menu > li > a,
+.tooltip, .popover {
+  &:extend(.normal);
+}
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  small, .small {
+    &:extend(.normal);
+  }
+}
+
+// font-weight (부트스트랩)
+@headings-font-weight:   @bold;
+@btn-font-weight:        @normal;
+@alert-link-font-weight: @bold;
+@badge-font-weight:      @bold;
+@close-font-weight:      @bold;
