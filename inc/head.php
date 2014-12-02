@@ -21,12 +21,19 @@ function akaiv_wp_title( $title, $sep ) {
 }
 add_filter( 'wp_title', 'akaiv_wp_title', 10, 2 );
 
-/* <head>: 메타, 파비콘 */
+/* <head>: IE8 대응, 메타, 파비콘 */
 function akaiv_add_opengraph_namespace( $input ) {
   return $input.' prefix="og: http://ogp.me/ns#"';
 }
 add_filter( 'language_attributes', 'akaiv_add_opengraph_namespace' );
-function akaiv_head() { ?>
+function akaiv_head() {
+  if (WP_ENV != 'development') :
+    echo'<!--[if lt IE 9]>';
+    echo'<script src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/html5shiv/dist/html5shiv.min.js"></script>';
+    echo'<script src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/respond/dest/respond.min.js"></script>';
+    echo'<![endif]-->';
+  endif; ?>
+
   <!-- 검색엔진최적화 - http://simcheolhwan.com -->
   <?php if ( is_404() ) : ?>
     <meta name="robots" content="noindex,follow">
