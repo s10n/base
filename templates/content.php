@@ -7,9 +7,9 @@
       <?php akaiv_the_title(); ?>
     </h1>
     <div class="entry-meta">
-      <?php akaiv_post_meta( 'category', 'fa-folder-open' ); ?>
-      <?php akaiv_post_meta( 'date', 'fa-clock-o' ); ?>
-      <?php akaiv_post_meta( 'author', 'fa-user' ); ?>
+      <?php akaiv_entry_meta( 'category', 'fa-folder-open' ); ?>
+      <?php akaiv_entry_meta( 'date', 'fa-clock-o' ); ?>
+      <?php akaiv_entry_meta( 'author', 'fa-user' ); ?>
       <?php akaiv_edit_post_link( false, 'fa-pencil' ); ?>
     </div>
   </header>

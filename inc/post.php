@@ -78,7 +78,7 @@ function akaiv_get_attachment_image_src($attachment_id, $size = 'full') {
 }
 
 /* 메타 */
-function akaiv_post_meta($meta = null, $icon = '') {
+function akaiv_entry_meta($meta = null, $icon = '') {
   if ( ! $meta ) return;
   if ( ! empty($icon) ) $icon = '<i class="fa fa-fw '.$icon.'"></i> ';
 
@@ -101,6 +101,14 @@ function akaiv_post_meta($meta = null, $icon = '') {
     <span class="author"><?php echo $icon; ?><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author"><?php echo esc_html( get_the_author() ); ?></a></span><?php
 
   endif;
+}
+/* 메타 (커스텀필드) */
+function akaiv_post_meta( $meta ) {
+  echo akaiv_get_post_meta( $meta );
+}
+function akaiv_get_post_meta( $meta ) {
+  $value = get_post_meta( get_the_ID(), 'wpcf-'.$meta, true );
+  return $value;
 }
 
 /* 편집 링크 */
