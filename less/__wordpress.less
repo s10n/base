@@ -3,18 +3,6 @@
 @import "@{style-path}/wordpress/image";
 @import "@{style-path}/wordpress/entry";
 
-// 페이지 헤더 (보관함, 글, 페이지)
-.page-header {
-	margin-top: 10px;
-	> h1 {
-		.font-size(28);
-		margin-bottom: 5px;
-		@media (min-width: @tablet) {
-			.font-size(36);
-		}
-	}
-}
-
 // Editor Style
 .mceContentBody {
 	&:extend(.singular .entry-content all);
