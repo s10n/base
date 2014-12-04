@@ -135,3 +135,17 @@ function akaiv_post_nav() {
     </div>
   </nav><?php
 }
+
+/* 도구: 레티나 이미지 */
+function akaiv_retina_image( $filename, $ext = 'png', $alt ) {
+  $src    = akaiv_get_image( $filename .    '.' . $ext );
+  $srcset = akaiv_get_image( $filename . '@2x.' . $ext . ' 2x' );
+  list( $src_width, $src_height ) = getimagesize( $src );
+  $hwstring = image_hwstring( $src_width, $src_height );
+  echo '<img src="'.$src.'" alt="'.$alt.'" '.$hwstring.'srcset="'.$srcset.'">';
+}
+
+/* 도구: 테마 디렉토리의 이미지파일 리턴 */
+function akaiv_get_image( $image ) {
+  return get_template_directory_uri() . '/images/' . $image;
+}
