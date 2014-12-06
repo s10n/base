@@ -5,9 +5,9 @@ function akaiv_body_class( $classes ) {
   if ( $is_IE )
     $classes[] = 'ie';
 
-  if ( is_singular() && ! is_single() && ! is_home() && ! is_front_page() ) :
+  if ( is_singular() && ! is_home() && ! is_front_page() ) :
     $classes[] = 'singular';
-    if ( ! in_array(basename(get_permalink()), $classes) ) :
+    if ( ! is_single() && ! in_array(basename(get_permalink()), $classes) ) :
       $classes[] = 'page-'.basename(get_permalink());
     endif;
   endif;
