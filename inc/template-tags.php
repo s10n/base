@@ -60,7 +60,7 @@ function akaiv_get_the_archive_title() {
   elseif ( is_tax( 'post_format', 'post-format-audio'   ) ) : $title = '오디오';
   elseif ( is_tax( 'post_format', 'post-format-chat'    ) ) : $title = '챗';
   elseif ( is_post_type_archive() ) :
-    $title = sprintf( '보관함: %s', post_type_archive_title( '', false ) );
+    $title = post_type_archive_title( '', false );
   elseif ( is_tax() ) :
     $tax = get_taxonomy( get_queried_object()->taxonomy );
     $title = sprintf( '%1$s: %2$s', $tax->labels->singular_name, single_term_title( '', false ) );
@@ -79,7 +79,11 @@ function akaiv_the_archive_description( $before = '', $after = '' ) {
   endif;
 }
 function akaiv_get_the_archive_description() {
-  return term_description();
+  if ( ! is_post_type_archive() ) :
+    return term_description();
+  else :
+    return get_queried_object( 'post_type' )->description;
+  endif;
 }
 
 /* 페이지 주소 */
@@ -103,6 +107,8 @@ function akaiv_get_archive_url() {
   elseif ( is_day()      ) : $canonical = get_day_link(   get_query_var( 'year' ), get_query_var( 'monthnum' ), get_query_var( 'day' ) );
   elseif ( is_tax( 'post_format' ) ) :
     $canonical = get_term_link( get_query_var( 'post_format' ), 'post_format' );
+  elseif ( is_post_type_archive() ) :
+    $canonical = get_post_type_archive_link( get_query_var( 'post_type' ) );
   else :
     $canonical = '';
   endif;
@@ -155,12 +161,18 @@ function akaiv_meta($meta = null) {
     akaiv_url();
 
   elseif ( $meta == 'description' ) :
-    $excerpt = strip_tags(get_the_excerpt());
-    if ( ! $excerpt ) :
-      $queried_object = get_queried_object();
-      $excerpt = akaiv_trim_excerpt( $queried_object->post_content );
+    if ( is_archive() ) :
+      akaiv_the_archive_description();
+    elseif ( is_single() ) :
+      $excerpt = strip_tags(get_the_excerpt());
+      if ( ! $excerpt ) :
+        $queried_object = get_queried_object();
+        $excerpt = akaiv_trim_excerpt( $queried_object->post_content );
+      endif;
+      echo $excerpt;
+    else:
+      return;
     endif;
-    echo $excerpt;
 
   elseif ( $meta == 'section' ) :
     echo get_the_category()[0]->cat_name;

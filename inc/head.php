@@ -49,10 +49,12 @@ function akaiv_head() {
 
   <?php elseif ( is_archive() ) : ?>
     <meta name="robots" content="noindex,follow">
+    <meta name="description" content="<?php akaiv_meta( 'description' ); ?>">
     <link rel="canonical" href="<?php akaiv_meta( 'url' ); ?>">
     <meta property="og:title" content="<?php akaiv_meta( 'title' ); ?>">
     <meta property="og:url" content="<?php akaiv_meta( 'url' ); ?>">
     <meta property="og:type" content="object">
+    <meta property="og:description" content="<?php akaiv_meta( 'description' ); ?>">
 
   <?php elseif ( is_singular() ) : ?>
     <meta property="og:title" content="<?php akaiv_meta( 'title' ); ?>">
