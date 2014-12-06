@@ -78,6 +78,7 @@ function akaiv_the_archive_description( $before = '', $after = '' ) {
     echo $before . $description . $after;
   endif;
 }
+remove_filter( 'term_description', 'wpautop' );
 function akaiv_get_the_archive_description() {
   if ( ! is_post_type_archive() ) :
     return term_description();
