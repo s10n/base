@@ -1,3 +1,4 @@
 [submodule "style"]
 	path = style
 	url = https://github.com/akaiv/style.git
+	branch = master
