@@ -40,7 +40,7 @@ function akaiv_meta($meta = null) {
     echo get_the_author_meta( 'display_name', $author_id );
 
   elseif ( $meta == 'image' ) :
-    $fb_image = get_template_directory_uri().'/images/fb-image.jpg';
+    $fb_image = get_template_directory_uri().'/images/fb-image.png';
     if ( is_singular() ) :
       $thumbnail_src = akaiv_get_post_thumbnail_src();
       $image         = ( $thumbnail_src ) ? $thumbnail_src : $fb_image;
