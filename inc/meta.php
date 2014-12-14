@@ -94,6 +94,8 @@ function akaiv_get_archive_url() {
     $canonical = get_term_link( get_query_var( 'post_format' ), 'post_format' );
   elseif ( is_post_type_archive() ) :
     $canonical = get_post_type_archive_link( get_query_var( 'post_type' ) );
+  elseif ( is_tax() ) :
+    $canonical = get_term_link( get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
   else :
     $canonical = '';
   endif;
