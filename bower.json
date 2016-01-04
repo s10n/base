@@ -6,8 +6,8 @@
     "assets"
   ],
   "dependencies": {
-    "bootstrap": "3.3.5",
-    "fontawesome": "4.4.0",
+    "bootstrap": "3.3.6",
+    "fontawesome": "4.5.0",
     "modernizr": "2.8.3",
     "html5shiv": "3.7.2",
     "respond": "1.4.2"
