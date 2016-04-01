@@ -125,21 +125,15 @@ function akaiv_edit_post_link($right = false, $icon = '') {
 }
 
 /* 내비게이션 버튼 */
-function akaiv_post_nav() {
-  $previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
-  $next     = get_adjacent_post( false, '', false );
-  if ( ! $next && ! $previous ) return; ?>
-  <nav class="navigation post-navigation" role="navigation">
-    <h1 class="screen-reader-text"><?php echo 'Post navigation'; ?></h1>
-    <div class="nav-links"><?php
-      if ( is_attachment() ) : /* 첨부파일 페이지일 때 */ ?>
-        <div class="published-in"><?php
-          previous_post_link( '%link', '<i class="fa fa-fw fa-folder-open"></i> 발행 위치: ' . '%title' ); ?>
-        </div><?php
-      else : /* 첨부파일 페이지가 아닐 때 */
-        previous_post_link( '%link', '<i class="fa fa-fw fa-angle-left"></i> 이전 글');
-        next_post_link( '%link', '다음 글 <i class="fa fa-fw fa-angle-right"></i>' );
-      endif; ?>
-    </div>
-  </nav><?php
+function akaiv_post_navigation() {
+  if ( is_singular( 'attachment' ) ) :
+    the_post_navigation( array(
+      'prev_text' => '<i class="fa fa-fw fa-folder-open"></i> 발행 위치: %title',
+    ) );
+  elseif ( is_singular( 'post' ) ) :
+    the_post_navigation( array(
+      'next_text' => '다음 글 <i class="fa fa-fw fa-angle-right"></i>',
+      'prev_text' => '<i class="fa fa-fw fa-angle-left"></i> 이전 글',
+    ) );
+  endif;
 }

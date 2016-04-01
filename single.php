@@ -5,7 +5,7 @@ akaiv_before_content(); ?>
 <?php
 while ( have_posts() ) : the_post();
   get_template_part( 'templates/content' );
-  akaiv_post_nav();
+  akaiv_post_navigation();
 endwhile;
 ?>
 
