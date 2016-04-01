@@ -2,11 +2,13 @@
 /* 본문 영역 시작 */
 function akaiv_before_content() {
   // get_sidebar(); ?>
-  <div id="content" class="site-content" role="main"><?php
+  <div id="content" class="site-content" role="main">
+    <div class="container"><?php
 }
 
 /* 본문 영역 끝 */
 function akaiv_after_content() { ?>
+    </div>
   </div><!-- #content --><?php
 }
 

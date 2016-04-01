@@ -16,7 +16,7 @@
 <a class="skip-link sr-only" href="#content"><?php echo 'Skip to content'; ?></a>
 
 <header id="masthead" class="site-header" role="banner">
-  <nav id="gnb" class="site-navigation gnb navbar navbar-default navbar-fixed-top" role="navigation">
+  <nav id="gnb" class="site-navigation gnb navbar navbar-default navbar-fixed-top" role="navigation" aria-label="메뉴">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#gnb-collapse">
@@ -44,4 +44,3 @@
 </header><!-- .site-header -->
 
 <main id="main" class="site-main" role="main">
-  <?php if ( ! is_home() && ! is_front_page() ) echo '<div class="container">'; ?>

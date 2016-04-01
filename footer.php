@@ -1,4 +1,3 @@
-  <?php if ( ! is_home() && ! is_front_page() ) echo '</div><!-- .container -->'; ?>
 </main><!-- .site-main -->
 
 <footer id="colophon" class="site-footer" role="contentinfo">
