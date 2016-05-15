@@ -1,6 +1,6 @@
 <?php
 get_header();
-akaiv_before_content(); ?>
+akaiv_before_main(); ?>
 
 <?php
   if ( have_posts() ) :
@@ -15,5 +15,5 @@ akaiv_before_content(); ?>
 ?>
 
 <?php
-akaiv_after_content();
+akaiv_after_main();
 get_footer();

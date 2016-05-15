@@ -1,19 +1,19 @@
 <?php
 /* 본문 영역 시작 */
-function akaiv_before_content() {
+function akaiv_before_main() {
   // get_sidebar(); ?>
-  <div id="content" class="site-content" role="main">
+  <main id="main" class="site-main" role="main">
     <div class="container"><?php
 }
 
 /* 본문 영역 끝 */
-function akaiv_after_content() { ?>
+function akaiv_after_main() { ?>
     </div>
-  </div><!-- #content --><?php
+  </main><?php
 }
 
 /* 페이지 헤더 */
-function akaiv_page_header($heading = null) { ?>
+function akaiv_page_header( $heading = null ) { ?>
   <header class="page-header">
     <h1 class="page-title"><?php
       if ( $heading ) :
