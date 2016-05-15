@@ -1,4 +1,5 @@
 <?php
+require get_template_directory() . '/inc/_project.php';
 require get_template_directory() . '/inc/class.php';
 require get_template_directory() . '/inc/enqueue.php';
 require get_template_directory() . '/inc/head.php';
