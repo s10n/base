@@ -112,12 +112,12 @@ function akaiv_get_post_meta( $meta ) {
 }
 
 /* 편집 링크 */
-function akaiv_edit_post_link($right = false, $icon = '') {
+function akaiv_edit_post_link($position = 'left', $icon = '') {
   if ( ! empty($icon) )
     $icon = '<i class="fa fa-fw '.$icon.'"></i> ';
   $before = '<span class="edit-link">'.$icon;
   $after = '</span>';
-  if ( $right ) :
+  if ( 'right' === $position ) :
     $before = '<div class="text-right">'.$before;
     $after = $after.'</div>';
   endif;
