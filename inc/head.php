@@ -26,13 +26,7 @@ function akaiv_add_opengraph_namespace( $input ) {
   return $input.' prefix="og: http://ogp.me/ns#"';
 }
 add_filter( 'language_attributes', 'akaiv_add_opengraph_namespace' );
-function akaiv_head() {
-  if (WP_ENV != 'development') :
-    echo '<!--[if lt IE 9]>';
-    echo '<script src="' . esc_url( get_template_directory_uri() ) . '/assets/html5shiv/dist/html5shiv.min.js"></script>';
-    echo '<script src="' . esc_url( get_template_directory_uri() ) . '/assets/respond/dest/respond.min.js"></script>';
-    echo '<![endif]-->';
-  endif; ?>
+function akaiv_head() { ?>
 
   <!-- 검색엔진최적화 - http://simcheolhwan.com -->
   <?php if ( is_404() ) : ?>
