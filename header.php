@@ -13,6 +13,7 @@
 </head>
 
 <body <?php body_class(); ?>>
+<!--[if IE]><div class="container"><div class="alert alert-warning">지원하지 않는 브라우저입니다. 브라우저를 <a href="http://www.whatbrowser.org/intl/ko">업그레이드</a>하세요.</div></div><![endif]-->
 <a class="skip-link sr-only" href="#content"><?php echo 'Skip to content'; ?></a>
 
 <header id="masthead" class="site-header" role="banner">
