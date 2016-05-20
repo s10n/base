@@ -19,7 +19,7 @@ function akaiv_get_image( $image ) {
 }
 
 /* 요약 생성 */
-function akaiv_trim_excerpt($text = '') {
+function akaiv_trim_excerpt( $text = '' ) {
   /** wp-includes/formatting.php에서 wp_trim_excerpt() 함수를 복제 */
   $text = strip_shortcodes( $text );
   $text = apply_filters( 'the_content', $text );

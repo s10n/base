@@ -21,14 +21,13 @@ function akaiv_wp_title( $title, $sep ) {
 }
 add_filter( 'wp_title', 'akaiv_wp_title', 10, 2 );
 
-/* <head>: IE8 대응, 메타, 파비콘 */
+/* <head>: 메타, 오픈그래프, 파비콘 */
 function akaiv_add_opengraph_namespace( $input ) {
   return $input.' prefix="og: http://ogp.me/ns#"';
 }
 add_filter( 'language_attributes', 'akaiv_add_opengraph_namespace' );
-function akaiv_head() { ?>
 
-  <!-- 검색엔진최적화 - http://simcheolhwan.com -->
+function akaiv_head() { ?>
   <?php if ( is_404() ) : ?>
     <meta name="robots" content="noindex,follow">
     <meta property="og:title" content="<?php akaiv_meta( 'title' ); ?>">

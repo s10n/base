@@ -1,6 +1,6 @@
 <?php
 /* 시작 */
-function akaiv_before_post($post = true) {
+function akaiv_before_post( $post = true ) {
   if ( $post ) : ?>
     <article <?php post_class(); ?>><?php
   else : ?>
@@ -15,23 +15,28 @@ function akaiv_after_post() { ?>
 
 /* 제목 */
 function akaiv_the_title() {
+  echo akaiv_get_title();
+}
+function akaiv_get_title() {
   $title = trim(get_the_title());
-  if ( ! $title ) $title = '(제목이 없는 글)';
-  echo $title;
+  if ( empty( $title ) ) $title = '(제목이 없는 글)';
+  return $title;
 }
 
 /* 썸네일 */
 function akaiv_post_thumbnail() {
   if ( post_password_required() && ! is_singular() ) : /* 비밀 글 */ ?>
-    <a class="post-thumbnail" href="<?php the_permalink(); ?>"><?php akaiv_the_post_thumbnail_placeholder( 'thumbnail', 'thumbnail-lock' ); ?></a><?php
+    <a class="post-thumbnail" href="<?php the_permalink(); ?>">
+      <?php akaiv_the_post_thumbnail_placeholder( 'thumbnail', 'thumbnail-lock' ); ?>
+    </a><?php
     return;
   endif;
 
   if ( is_singular() ) : /* 글, 페이지, 첨부파일 */
     if ( has_post_thumbnail() ) : ?>
-      <div class="post-thumbnail">
+      <section class="post-thumbnail">
         <?php the_post_thumbnail( 'full' ); ?>
-      </div><?php
+      </section><?php
     endif;
 
   else : /* 보관함 */ ?>
@@ -47,7 +52,7 @@ function akaiv_post_thumbnail() {
 }
 
 /* 썸네일: 플레이스홀더 */
-function akaiv_the_post_thumbnail_placeholder($size = 'thumbnail', $filename = 'thumbnail-post', $ext = 'png') {
+function akaiv_the_post_thumbnail_placeholder( $size = 'thumbnail', $filename = 'thumbnail-post', $ext = 'png' ) {
   $src    = get_template_directory_uri().'/images/'.$filename.'.'.$ext;
   $srcset = get_template_directory_uri().'/images/'.$filename.'@2x.'.$ext.' 2x';
   $alt = get_the_title();
@@ -59,27 +64,27 @@ function akaiv_the_post_thumbnail_placeholder($size = 'thumbnail', $filename = '
 }
 
 /* 썸네일: 레티나 */
-function akaiv_the_post_thumbnail_srcset($size1x, $size2x) {
+function akaiv_the_post_thumbnail_srcset( $size1x, $size2x ) {
   $attr = array( 'srcset' => akaiv_get_post_thumbnail_src( $size2x ).' 2x' );
   the_post_thumbnail( $size1x, $attr );
 }
 
 /* 썸네일: 소스 */
-function akaiv_get_post_thumbnail_src($size = 'full') {
+function akaiv_get_post_thumbnail_src( $size = 'full' ) {
   $post_thumbnail_id = get_post_thumbnail_id();
   return akaiv_get_attachment_image_src( $post_thumbnail_id, $size );
 }
 
 /* 첨부 이미지: 소스 */
-function akaiv_get_attachment_image_src($attachment_id, $size = 'full') {
+function akaiv_get_attachment_image_src( $attachment_id, $size = 'full' ) {
   $image = wp_get_attachment_image_src( $attachment_id, $size );
   list( $src, $width, $height ) = $image;
   return $src;
 }
 
 /* 메타 */
-function akaiv_entry_meta($meta = null, $icon = '') {
-  if ( ! $meta ) return;
+function akaiv_entry_meta( $meta = null, $icon = '' ) {
+  if ( empty( $meta ) ) return;
   if ( ! empty($icon) ) $icon = '<i class="fa fa-fw '.$icon.'"></i> ';
 
   if ( $meta == 'category' ) :
@@ -89,16 +94,28 @@ function akaiv_entry_meta($meta = null, $icon = '') {
     endif;
 
   elseif ( $meta == 'tag' ) :
-    $tags_list = get_the_tag_list( '', ', ', '' );
+    $tags_list = get_the_tag_list( '', ' ', '' );
     if ( $tags_list ) : ?>
       <span class="tag-links"><?php echo $icon.$tags_list; ?></span><?php
     endif;
 
   elseif ( $meta == 'date' ) : ?>
-    <span class="posted-on"><?php echo $icon; ?><a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><time class="entry-date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time></a></span><?php
+    <span class="posted-on">
+      <?php echo $icon; ?>
+      <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
+        <time class="entry-date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
+          <?php echo esc_html( get_the_date() ); ?>
+        </time>
+      </a>
+    </span><?php
 
   elseif ( $meta == 'author' ) : ?>
-    <span class="author"><?php echo $icon; ?><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author"><?php echo esc_html( get_the_author() ); ?></a></span><?php
+    <span class="author">
+      <?php echo $icon; ?>
+      <a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author">
+        <?php echo esc_html( get_the_author() ); ?>
+      </a>
+    </span><?php
 
   endif;
 }
@@ -112,14 +129,14 @@ function akaiv_get_post_meta( $meta ) {
 }
 
 /* 편집 링크 */
-function akaiv_edit_post_link($position = 'left', $icon = '') {
+function akaiv_edit_post_link( $position = 'left', $icon = '' ) {
   if ( ! empty($icon) )
     $icon = '<i class="fa fa-fw '.$icon.'"></i> ';
   $before = '<span class="edit-link">'.$icon;
-  $after = '</span>';
+  $after  = '</span>';
   if ( 'right' === $position ) :
     $before = '<div class="text-right">'.$before;
-    $after = $after.'</div>';
+    $after  = $after.'</div>';
   endif;
   edit_post_link( '편집', $before, $after );
 }
