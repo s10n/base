@@ -1,3 +1,3 @@
-<div class="page-content">
-  <p>Welcome!</p>
-</div>
+<section class="page-content">
+  <p>Hello, World!</p>
+</section>

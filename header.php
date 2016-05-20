@@ -40,8 +40,8 @@
           'walker'            => new wp_bootstrap_navwalker()
         ) );
       ?>
-    </div><!-- .container -->
+    </div>
   </nav>
-</header><!-- .site-header -->
+</header>
 
 <div id="content" class="site-content">
