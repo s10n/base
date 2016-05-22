@@ -1,6 +1,22 @@
 module.exports = function (grunt) {
   'use strict';
 
+  var bootstrapScripts = [
+    'assets/bootstrap/js/transition.js',
+    'assets/bootstrap/js/alert.js',
+    'assets/bootstrap/js/button.js',
+    'assets/bootstrap/js/carousel.js',
+    'assets/bootstrap/js/collapse.js',
+    'assets/bootstrap/js/dropdown.js',
+    'assets/bootstrap/js/modal.js',
+    'assets/bootstrap/js/tooltip.js',
+    'assets/bootstrap/js/popover.js',
+    'assets/bootstrap/js/scrollspy.js',
+    'assets/bootstrap/js/tab.js',
+    'assets/bootstrap/js/affix.js'
+  ];
+
+  // Project configuration.
   grunt.initConfig({
 
     // Metadata.
@@ -8,44 +24,37 @@ module.exports = function (grunt) {
 
     // Task configuration.
     clean: {
-      dist: [
-        '<%= less.core.dest %>',
-        '<%= less.core.options.sourceMapFilename %>',
-        '<%= cssmin.core.dest %>',
-        '<%= concat.core.dest %>',
-        '<%= uglify.core.dest %>',
-      ]
+      js: 'scripts',
+      css: 'stylesheets'
     },
 
     jshint: {
-      options: {
-        jshintrc: 'js/.jshintrc'
-      },
+      options: { jshintrc: 'js/.jshintrc' },
       grunt: {
-        options: {
-          jshintrc: '.jshintrc'
-        },
+        options: { jshintrc: '.jshintrc' },
         src: 'Gruntfile.js'
       },
-      core: {
-        src: 'js/project.js'
-      }
+      core: { src: 'js/*.js' }
     },
 
     concat: {
       core: {
         src: [
-          'assets/bootstrap/dist/js/bootstrap.js',
+          bootstrapScripts,
           '<%= jshint.core.src %>'
         ],
-        dest: 'js/script.js'
+        dest: 'scripts/<%= pkg.name %>.js'
       }
     },
 
     uglify: {
+      options: {
+        compress: { warnings: false },
+        mangle: true,
+      },
       core: {
         src: '<%= concat.core.dest %>',
-        dest: 'js/script.min.js'
+        dest: 'scripts/<%= pkg.name %>.min.js'
       }
     },
 
@@ -54,12 +63,12 @@ module.exports = function (grunt) {
         options: {
           strictMath: true,
           sourceMap: true,
-          sourceMapURL: 'style.css.map',
-          sourceMapFilename: 'css/style.css.map',
-          sourceMapRootpath: '..',
+          sourceMapURL: '<%= pkg.name %>.css.map',
+          sourceMapFilename: 'stylesheets/<%= pkg.name %>.css.map',
+          sourceMapRootpath: '..'
         },
         src: 'less/style.less',
-        dest: 'css/style.css'
+        dest: 'stylesheets/<%= pkg.name %>.css'
       }
     },
 
@@ -77,53 +86,69 @@ module.exports = function (grunt) {
         ]
       },
       core: {
-        options: {
-          map: true
-        },
+        options: { map: true },
         src: '<%= less.core.dest %>'
-      },
+      }
     },
 
     csscomb: {
-      options: {
-        config: 'less/.csscomb.json'
-      },
-      dist: {
-        expand: true,
-        cwd: 'css/',
-        src: ['*.css', '!*.min.css'],
-        dest: 'css/'
-      },
+      options: { config: 'less/.csscomb.json' },
+      core: {
+        src: '<%= less.core.dest %>',
+        dest: '<%= less.core.dest %>'
+      }
     },
 
     csslint: {
-      options: {
-        csslintrc: 'less/.csslintrc'
-      },
+      options: { csslintrc: 'less/.csslintrc' },
       dist: '<%= less.core.dest %>'
     },
 
     cssmin: {
       options: {
         compatibility: 'ie8',
-        keepSpecialComments: '*',
+        keepSpecialComments: 0,
         advanced: false
       },
       core: {
         src: '<%= less.core.dest %>',
-        dest: 'css/style.min.css'
+        dest: 'stylesheets/<%= pkg.name %>.min.css'
+      }
+    },
+
+    assets_versioning: {
+      js: {
+        options: {
+          tasks: ['uglify:core'],
+          versionsMapFile: 'scripts/versionsMapJS.json'
+        }
+      },
+      css: {
+        options: {
+          tasks: ['cssmin:core'],
+          versionsMapFile: 'stylesheets/versionsMapCSS.json'
+        }
       }
     },
 
     watch: {
       less: {
-        files: ['less/**/*.less', 'style/**/*.less'],
+        files: [
+          'less/**/*.less',
+          'style/**/*.less'
+        ],
         tasks: 'css',
         options: { livereload: true }
       },
       js: {
         files: '<%= jshint.core.src %>',
-        tasks: 'js'
+        tasks: 'js',
+        options: { livereload: true }
+      },
+      grunt: {
+        files: 'Gruntfile.js',
+        tasks: 'dev',
+        options: { livereload: true }
       }
     }
 
@@ -133,19 +158,19 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
   require('time-grunt')(grunt);
 
-  // Register tasks
+  // Tasks
   grunt.registerTask('test-js',   ['jshint', 'concat']);
-  grunt.registerTask('dist-js',   ['test-js', 'uglify']);
+  grunt.registerTask('dist-js',   ['test-js', 'assets_versioning:js']);
   grunt.registerTask('test-css',  ['less']);
-  grunt.registerTask('dist-css',  ['test-css', 'autoprefixer', 'csscomb', 'csslint', 'cssmin']);
+  grunt.registerTask('dist-css',  ['test-css', 'autoprefixer', 'csscomb', 'csslint', 'assets_versioning:css']);
 
-  // Resister tasks: devlopment
+  // Tasks: Devlopment
   grunt.registerTask('js',        ['test-js']);
   grunt.registerTask('css',       ['test-css']);
   grunt.registerTask('dev',       ['test-js', 'test-css']);
   grunt.registerTask('default',   ['dev']);
 
-  // Resister tasks: production
+  // Tasks: Production
   grunt.registerTask('build-js',  ['dist-js']);
   grunt.registerTask('build-css', ['dist-css']);
   grunt.registerTask('build',     ['clean', 'dist-js', 'dist-css']);
