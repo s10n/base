@@ -7,6 +7,6 @@
   ],
   "dependencies": {
     "bootstrap": "3.3.6",
-    "fontawesome": "4.5.0"
+    "fontawesome": "4.6.3"
   }
 }
