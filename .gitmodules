@@ -1,4 +1,4 @@
-[submodule "style"]
-	path = style
+[submodule "akaiv-style"]
+	path = less/akaiv
 	url = https://github.com/akaiv/style.git
 	branch = master
