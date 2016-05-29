@@ -13,12 +13,13 @@
 	// 글: 내용
 	.page-content,
 	.entry-content {
+		.font-size(@font-size-entry);
+		&, dt, dd  { line-height: @line-height-entry }
 		h1, h2, h3 { margin: 25px 0 10px }
 		p, ul, ol  { margin-bottom: 10px }
+		table      { .table }
 		a:hover    { text-decoration: underline }
 		.btn:hover { text-decoration: none }
-		.font-size(@font-size-entry);
-		line-height: @line-height-entry;
 	}
 }
 
