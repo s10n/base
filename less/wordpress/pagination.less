@@ -1,0 +1,60 @@
+// 페이지네이션
+.nav-pagination {
+	.user-select(none);
+	text-align: center;
+	.pagination { margin: 0 }
+}
+.pagination > li > span.dots {
+	.text-muted;
+	cursor: default;
+	&:hover,
+	&:focus {
+		background-color: @pagination-bg;
+		color: @text-muted;
+	}
+}
+
+// 글 내비게이션
+.nav-links {
+	.clearfix;
+	text-align: center;
+	margin: 30px 0;
+
+	// 버튼 모양
+	a {
+		.text-light;
+		display: inline-block;
+		background-color: @pager-bg;
+		border: 1px solid @pager-border;
+		border-radius: @pager-border-radius;
+		padding: 5px 14px;
+		&:hover,
+		&:focus {
+			.text-light;
+			background-color: @pager-hover-bg;
+			text-decoration: none;
+		}
+	}
+
+	// 이전/다음을 각각 좌우에 위치
+	[rel="prev"] {
+		float: left;
+		padding-right: 20px;
+		i { margin-right: 3px }
+	}
+	[rel="next"] {
+		float: right;
+		padding-left: 20px;
+		i { margin-left: 3px }
+	}
+
+	// 발행 위치 (첨부 파일)
+	.attachment & .nav-previous {
+		.clearfix;
+		a {
+			float: none;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+	}
+}

@@ -1,0 +1,27 @@
+// 헤더: 메뉴 토글 버튼
+@navbar-default-toggle-hover-bg: @navbar-default-bg;
+.navbar-toggle {
+	.no-border;
+	&:hover {
+		.icon-bar { background-color: @navbar-default-link-hover-color }
+	}
+}
+
+// 본문: Clearing floats
+.hentry,
+.page-content,
+.entry-content {
+	.clearfix;
+}
+
+// 푸터
+.site-footer {
+	.text-light;
+	a {
+		.link(@text-light);
+	}
+	a.link-admin {
+		cursor: default;
+		.link(@text-light;@text-light);
+	}
+}

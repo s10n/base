@@ -1,0 +1,23 @@
+.alignleft {
+	clear: left;
+	float: left;
+	margin: @wp-img-margin (2 * @wp-img-margin) @wp-img-margin 0;
+}
+.alignright {
+	clear: right;
+	float: right;
+	margin: @wp-img-margin 0 @wp-img-margin (2 * @wp-img-margin);
+}
+.aligncenter {
+	clear: both;
+	.center-block;
+	margin-top:    @wp-img-margin;
+	margin-bottom: @wp-img-margin;
+}
+
+blockquote.alignleft,
+blockquote.alignright {
+	margin-top:    (2 * @wp-img-margin);
+	margin-bottom: (2 * @wp-img-margin);
+	width: 50%;
+}

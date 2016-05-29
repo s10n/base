@@ -1,0 +1,24 @@
+.gallery {
+	&:extend(.clearfix all);
+	margin-bottom: @wp-img-margin;
+}
+
+.gallery-item {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+}
+
+.gallery-icon img {
+	.center-block;
+}
+
+.gallery-caption {
+	text-align: center;
+}
+
+.gallery-columns(@n, @i: 1) when (@i =< @n) {
+	.gallery-columns-@{i} .gallery-item { max-width: (100% / @i) }
+	.gallery-columns(@n, (@i + 1));
+}
+.gallery-columns(9);

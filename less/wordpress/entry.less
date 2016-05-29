@@ -1,0 +1,30 @@
+.singular {
+	// 글: 썸네일
+	.post-thumbnail {
+		margin-bottom: @wp-img-margin;
+		.wp-post-image { .size(100%;auto) }
+	}
+
+	// 글: 제목
+	.entry-header {
+		&:extend(.page-header all);
+	}
+
+	// 글: 내용
+	.page-content,
+	.entry-content {
+		h1, h2, h3 { margin: 25px 0 10px }
+		p, ul, ol  { margin-bottom: 10px }
+		a:hover    { text-decoration: underline }
+		.btn:hover { text-decoration: none }
+		.font-size(@font-size-entry);
+		line-height: @line-height-entry;
+	}
+}
+
+// 에디터
+.mce-content-body {
+	&:extend(.singular .entry-content all);
+	.bg-white;
+	margin: (@grid-gutter-width / 2);
+}

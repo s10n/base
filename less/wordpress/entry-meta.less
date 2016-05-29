@@ -1,0 +1,35 @@
+.entry-meta {
+	.font-size(@font-size-meta);
+	.text-light;
+	a { .link(@text-light) }
+	> span { margin-right: 10px }
+
+	// 카테고리와 저자
+	.cat-links,
+	.byline {
+		display: none;
+		@media (min-width: @grid-float-breakpoint) {
+			display: inline;
+		}
+	}
+
+	// 태그
+	.tag-links {
+		display: block;
+		line-height: @line-height-entry;
+		margin: 20px auto;
+		a {
+			.label;
+			.label-default;
+		}
+	}
+}
+
+// 캡션
+.wp-caption-text,
+.gallery-caption {
+	.font-size(@font-size-meta);
+	.text-light;
+	margin-top: (0.5 * @wp-img-margin);
+	margin-bottom: @wp-img-margin;
+}
