@@ -29,9 +29,9 @@ module.exports = function (grunt) {
     },
 
     jshint: {
-      options: { jshintrc: 'js/.jshintrc' },
+      options: { jshintrc: 'assets/bootstrap/js/.jshintrc' },
       grunt: {
-        options: { jshintrc: '.jshintrc' },
+        options: { jshintrc: 'assets/bootstrap/grunt/.jshintrc' },
         src: 'Gruntfile.js'
       },
       core: { src: 'js/*.js' }
@@ -92,7 +92,7 @@ module.exports = function (grunt) {
     },
 
     csscomb: {
-      options: { config: 'less/.csscomb.json' },
+      options: { config: 'assets/bootstrap/less/.csscomb.json' },
       core: {
         src: '<%= less.core.dest %>',
         dest: '<%= less.core.dest %>'
@@ -100,7 +100,7 @@ module.exports = function (grunt) {
     },
 
     csslint: {
-      options: { csslintrc: 'less/.csslintrc' },
+      options: { csslintrc: 'assets/bootstrap/less/.csslintrc' },
       dist: '<%= less.core.dest %>'
     },
 
