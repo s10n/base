@@ -1,3 +1,5 @@
+@import "@{bootstrap-path}/panels.less";
+
 .sitemap {
 	@sitemap-link: @gray-30;
 	line-height: 1.8;
@@ -9,7 +11,7 @@
 	.tag-links a   { .link(@white;@white) }
 
 	// 믹스인: 목록
-	.sitemap-list() {
+	.sitemap-list {
 		color: @text-light;
 		&, .children { .list-unstyled }
 		li:before {
@@ -20,7 +22,7 @@
 
 	// 모든 페이지
 	.sitemap-pages {
-		.sitemap-list();
+		&:extend(.sitemap .sitemap-list all);
 		.page_item:before              { content: @fa-var-square-o }
 		.page_item_has_children:before { content: @fa-var-plus-square-o }
 		.children { margin-left: 25px }
@@ -28,13 +30,13 @@
 
 	// 모든 날짜
 	.sitemap-archives {
-		.sitemap-list();
+		&:extend(.sitemap .sitemap-list all);
 		> li:before { content: @fa-var-calendar }
 	}
 
 	// 모든 저자
 	.sitemap-authors {
-		.sitemap-list();
+		&:extend(.sitemap .sitemap-list all);
 		> li:before { content: @fa-var-user }
 	}
 
@@ -47,6 +49,7 @@
 	.type-post {
 		.entry-meta { .14px; display: inline-block }
 		.post-format { margin-right: 10px }
+		.entry-format { .text-light }
 	}
 
 	// 아이콘: 글 형식

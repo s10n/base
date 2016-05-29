@@ -10,7 +10,7 @@
 
 <body <?php body_class(); ?>>
 <div class="container">
-  <!--[if IE]><div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>지원하지 않는 브라우저입니다. 브라우저를 <a href="http://www.whatbrowser.org/intl/ko">업그레이드</a>하세요.</div><![endif]-->
+  <!--[if IE]><div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>지원하지 않는 브라우저입니다. 브라우저를 <a class="alert-link" href="http://www.whatbrowser.org/intl/ko">업그레이드</a>하세요.</div><![endif]-->
   <a class="sr-only sr-only-focusable" href="#content">본문으로 건너뛰기</a>
 </div>
 

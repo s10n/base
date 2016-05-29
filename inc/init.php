@@ -11,7 +11,9 @@ function akaiv_setup_theme() {
   add_theme_support( 'post-thumbnails' );
   add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
   // add_theme_support( 'post-formats', array( '...' ) );
-  add_editor_style( 'css/style.css' );
+  $get_pkg = file_get_contents(get_template_directory() . '/package.json');
+  $pkg     = json_decode($get_pkg, true);
+  add_editor_style( 'stylesheets/' . $pkg['name'] . '.css' );
   add_filter( 'use_default_gallery_style', '__return_false' );
   show_admin_bar( false );
   // load_theme_textdomain( 'project', get_template_directory() . '/languages' );

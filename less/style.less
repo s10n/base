@@ -1,28 +1,21 @@
 @charset "utf-8";
 @assets-path: "../assets";
-@style-path: "../style";
 
-// 프레임워크
+// 라이브러리
 @import "_bootstrap";
 @import "_fontawesome";
-@import "_customize";
+@import "_akaiv";
 @import "_wordpress";
 
-// 기본
-@import "@{style-path}/akaiv/akaiv";
-@import "_fonts";
-@import "_theme";
+// 변수
 @import "_variables";
-//@import "_mixins";
 
-// 요소
+// 컴포넌트
 @import "_components";
-@import "_headings";
+@import "_typhography";
 
 // 레이아웃
+@import "admin";
 @import "basic";
 @import "basic-header";
 @import "basic-footer";
-@import "content-archives";
-@import "content-entry";
-@import "page-front";

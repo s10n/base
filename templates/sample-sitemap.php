@@ -73,9 +73,9 @@
                   </span>
                 </div>
                 <?php if ( ! get_the_title() ) : ?>
-                  <a href="<?php the_permalink(); ?>" class="no-title">(제목이 없는 글)</a>
+                  <a href="<?php the_permalink(); ?>" class="entry-title no-title">(제목이 없는 글)</a>
                 <?php else : ?>
-                  <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                  <a href="<?php the_permalink(); ?>" class="entry-title "><?php the_title(); ?></a>
                 <?php endif; ?>
               </article><?php
             endwhile; // End while : 글 ?>

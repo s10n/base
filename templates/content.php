@@ -28,22 +28,17 @@
 
 <?php else : /* 목록 */ ?>
 
-  <div class="row">
-    <div class="col-xs-3 col-sm-2">
-      <?php akaiv_post_thumbnail(); ?>
-    </div>
+  <?php akaiv_post_thumbnail(); ?>
 
-    <div class="col-xs-9 col-sm-10">
-      <header class="entry-header">
-        <h1 class="entry-title">
-          <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php akaiv_the_title(); ?></a>
-        </h1>
-      </header>
-      <section class="entry-summary">
-        <?php the_excerpt(); ?>
-      </section>
-    </div>
-  </div>
+  <header class="entry-header">
+    <h1 class="entry-title">
+      <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php akaiv_the_title(); ?></a>
+    </h1>
+  </header>
+
+  <section class="entry-summary">
+    <?php the_excerpt(); ?>
+  </section>
 
 <?php endif; ?>
 

@@ -2,7 +2,7 @@
 
 <footer id="colophon" class="site-footer" role="contentinfo">
   <div class="container">
-    <div class="site-info">
+    <div class="site-info clearfix">
       <p class="pull-left">
         <a href="http://akaiv.com/" target="_blank" data-toggle="tooltip" data-placement="top" title="아카이브">akaiv</a>
         &copy; <?php echo date( 'Y', current_time( 'timestamp' ) ); ?>
