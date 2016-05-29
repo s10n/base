@@ -9,8 +9,10 @@
 </head>
 
 <body <?php body_class(); ?>>
-<!--[if IE]><div class="container"><div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>지원하지 않는 브라우저입니다. 브라우저를 <a href="http://www.whatbrowser.org/intl/ko">업그레이드</a>하세요.</div></div><![endif]-->
-<a class="sr-only sr-only-focusable" href="#content">콘텐츠로 건너뛰기</a>
+<div class="container">
+  <!--[if IE]><div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>지원하지 않는 브라우저입니다. 브라우저를 <a href="http://www.whatbrowser.org/intl/ko">업그레이드</a>하세요.</div><![endif]-->
+  <a class="sr-only sr-only-focusable" href="#content">본문으로 건너뛰기</a>
+</div>
 
 <header id="masthead" class="site-header" role="banner">
   <nav id="gnb" class="site-navigation gnb navbar navbar-default navbar-fixed-top" role="navigation" aria-label="메뉴">
