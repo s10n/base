@@ -10,11 +10,11 @@ function akaiv_wp_title( $title, $sep ) {
 
   if ( is_home() || is_front_page() ) :
     if ( ! $site_description ) : return;
-    else : $title = '$title $sep $site_description';
+    else : $title = "$title $sep $site_description";
     endif;
 
   else :
-    $title = '$title $sep $site_name';
+    $title = "$title $sep $site_name";
 
   endif;
   return $title;
