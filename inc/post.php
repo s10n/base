@@ -42,7 +42,7 @@ function akaiv_post_thumbnail() {
   else : /* 보관함 */ ?>
     <a class="post-thumbnail" href="<?php the_permalink(); ?>"><?php
       if ( has_post_thumbnail() ) :
-        the_post_thumbnail( 'thumbnail' );
+        the_post_thumbnail( 'thumbnail', array( 'alt' => the_title_attribute( 'echo=0' ) ) );
       else :
         akaiv_the_post_thumbnail_placeholder( 'thumbnail' );
       endif; ?>
