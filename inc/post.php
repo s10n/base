@@ -25,7 +25,7 @@ function akaiv_get_title() {
 
 /* 썸네일 */
 function akaiv_post_thumbnail() {
-  if ( post_password_required() && ! is_singular() ) : /* 비밀 글 */ ?>
+  if ( post_password_required() ) : /* 비밀 글 */ ?>
     <a class="post-thumbnail" href="<?php the_permalink(); ?>">
       <?php akaiv_the_post_thumbnail_placeholder( 'thumbnail', 'thumbnail-lock' ); ?>
     </a><?php
