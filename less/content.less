@@ -1,0 +1,25 @@
+// 글: 썸네일
+.post-thumbnail img {
+	.img-circle;
+}
+
+// 글: 제목
+.entry-title {
+	.font-size(18);
+	@media (min-width: @tablet) {
+		.font-size(22);
+	}
+	a { .link(@text) }
+}
+
+// 글: 메타
+.entry-meta {
+	.12px;
+	color: @text-light;
+	a { .link(@text-light) }
+	> span {
+		@media (min-width: @phone) {
+			margin-right: 10px;
+		}
+	}
+}

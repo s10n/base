@@ -23,6 +23,16 @@ function akaiv_get_title() {
   return $title;
 }
 
+/* 글: URL */
+function akaiv_get_url() {
+  $url = akaiv_get_post_meta( 'url' );
+  if ( ! $url ) $url = '#';
+  return esc_url( $url );
+}
+function akaiv_the_url() {
+  echo akaiv_get_url();
+}
+
 /* 썸네일 */
 function akaiv_post_thumbnail() {
   if ( post_password_required() ) : /* 비밀 글 */ ?>
@@ -40,7 +50,7 @@ function akaiv_post_thumbnail() {
     endif;
 
   else : /* 보관함 */ ?>
-    <a class="post-thumbnail" href="<?php the_permalink(); ?>"><?php
+    <a class="post-thumbnail" href="<?php akaiv_the_url(); ?>"><?php
       if ( has_post_thumbnail() ) :
         the_post_thumbnail( 'thumbnail', array( 'alt' => the_title_attribute( 'echo=0' ) ) );
       else :
@@ -102,7 +112,7 @@ function akaiv_entry_meta( $meta = null, $icon = '' ) {
   elseif ( $meta == 'date' ) : ?>
     <span class="posted-on">
       <?php echo $icon; ?>
-      <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
+      <a href="<?php echo get_month_link( get_the_time('Y'), get_the_time('m') ); ?>" rel="bookmark">
         <time class="entry-date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
           <?php echo esc_html( get_the_date() ); ?>
         </time>
