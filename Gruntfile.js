@@ -37,6 +37,17 @@ module.exports = function (grunt) {
       core: { src: 'js/*.js' }
     },
 
+    jscs: {
+      options: { config: 'assets/bootstrap/js/.jscsrc' },
+      grunt: {
+        options: { requireCamelCaseOrUpperCaseIdentifiers: false },
+        src: '<%= jshint.grunt.src %>'
+      },
+      core: {
+        src: '<%= jshint.core.src %>'
+      }
+    },
+
     concat: {
       core: {
         src: [
@@ -50,7 +61,7 @@ module.exports = function (grunt) {
     uglify: {
       options: {
         compress: { warnings: false },
-        mangle: true,
+        mangle: true
       },
       core: {
         src: '<%= concat.core.dest %>',
@@ -159,7 +170,7 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
 
   // Tasks
-  grunt.registerTask('test-js',   ['jshint', 'concat']);
+  grunt.registerTask('test-js',   ['jshint', 'jscs', 'concat']);
   grunt.registerTask('dist-js',   ['test-js', 'assets_versioning:js']);
   grunt.registerTask('test-css',  ['less']);
   grunt.registerTask('dist-css',  ['test-css', 'autoprefixer', 'csscomb', 'csslint', 'assets_versioning:css']);
